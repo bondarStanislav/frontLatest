@@ -1,0 +1,2576 @@
+{% load staticfiles %}
+<!doctype html>
+<html>
+	<head>
+		<title>Mail</title>
+        <meta charset="utf-8">
+
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="{% static '/images/myBiz-logo.png' %}" type="image/png" />
+    
+
+<!--        <META HTTP-EQUIV="Access-Control-Allow-Origin" CONTENT="http://dev.mybiz.in.ua">-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magic/1.1.0/magic.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.contextMenu.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+    
+<style>
+html {
+    height: 100%;
+}
+body {
+    background-color: #ccc;
+    /* height: 98%; */
+    font-family: Arial, sans-serif;
+    margin:0px;
+}
+            
+textarea:focus, input:focus{
+    outline: none;
+}
+
+.error {
+    color: #de2121;
+}
+
+.selectcompanies {
+    width: 104%;
+    text-align: center;
+    border: 0px;
+    background-color: #eee;
+    color: black;
+    margin-top: 3%;
+    height: 35px;
+}
+
+.filesystem-header-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 0 0;
+    height: auto;
+    background-color: lightgrey;
+    border-radius: 2em;
+    cursor: pointer;
+    }
+
+.profile-number {
+font-family: Arial, sans-serif;
+padding: 0 10px;
+font-size: 16px;
+}
+.filesystem-header-header img {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+.filesystem-header-header div {
+    border: 0;
+    margin: 0;
+    outline: 0;
+    padding: 0;
+    vertical-align: baseline;
+}
+.filesystem-logo {
+display: flex;
+flex-direction: row;
+justify-content: space-around;
+align-items: center;
+height: 120%;
+}
+.filesystem-logo a {
+height: 100%;
+}
+.filesystem-logo a img {
+  margin-left: 15px;
+  margin-top: 5px;
+  height: 80%;
+  width: auto;
+  border-radius: 1em;
+  background-color: #fff;
+}
+.filesystem-header-buttons {
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+margin: 2px 2px;
+height: 40px;
+background-color: white;
+border-bottom: 1px solid grey;
+cursor: pointer;
+width: 100%;
+position: fixed;
+top: 0;
+z-index: 25000;
+
+}
+.filesystem-header-buttons a {
+color: black;
+/* width: 100%; */
+text-decoration: none;
+}
+.filesystem-header-buttons i {
+padding-left: 0.6em;
+}
+.filesystem-header-right{
+display: flex;
+flex-direction: row;
+justify-content: flex-end;
+height: 100%;
+width: 30%;
+}
+.filesystem-icons{
+    display: flex;
+    justify-content: left;
+height: 100%;
+min-width: 126px;;
+margin-right: 10px !important;
+}
+.filesystem-icons a {
+display: inline-block;
+height: 30px;
+width: 30px;
+margin: 5px 2px;
+}
+.filesystem-icons img{
+height: 100%;
+width: 100%;
+}
+.header-buttons {
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+width: 80%;
+font-size: 125%;
+overflow: hidden;
+height: 100%
+}
+.header-buttons a {
+padding-left: 0.5em;
+font-family: "Roboto", sans-serif;
+color: black;
+text-decoration: none;
+}
+.inside-header-text {
+font-size: 1em;
+margin-left: 0.5em;
+}
+.filesystem-profile {
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+height: 100%;
+}
+.filesystem-profile .profile-buttons {
+display: flex;
+flex-direction: column;
+justify-content: space-around;
+align-items: center;
+width: 10%;
+height: 40px;
+margin-right: 10px;
+}
+.profile-buttons a, .profile-buttons img {
+width:19px;
+height: 19px;
+margin-bottom: 1px;
+cursor: pointer;
+}
+
+.filesystem-profile > i:first-of-type {
+border: 2px solid black;
+border-radius: 1em;
+padding: 0.2em;
+}
+.filesystem-profile .cabinet-image {
+width: 30px;
+height: 30px;
+border-radius: 50%;
+}
+
+#main {
+position: relative;
+top: 40px;
+height: 90vh;
+}
+#main #top_menu {
+    position: relative;
+    margin-top: 4px;
+    overflow: hidden;
+}
+
+#main #top_menu .item {
+    position: relative;
+    display: inline-block;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+#main #top_menu .item::after {
+    content: " ";
+    position: absolute;
+    right: -3px;
+    top: 7px;
+    width: 1px;
+    height: 25px;
+    display: block;
+    background-color: #bbb;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.circle {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    display: inline-block;
+    color: white;
+    text-align: center;
+}
+
+.statusok{
+    background-color: green;
+    /*content: "\2611";*/
+}
+
+.statusfail {
+    background-color: red;
+    /*content: "\2611";*/
+}
+
+#main #top_menu .item:last-child::after {
+    content: " ";
+    display: none;
+}
+
+#main #top_menu .item .icon {
+    position: absolute;
+    top: 4px;
+    left: 7px;
+    display: block;
+    width: 20px;
+    height: 20px;
+    background-color: green;
+    padding: 4px;
+    border-radius: 15px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+    color: #fff;
+    line-height: 20px;
+}
+
+#main #top_menu .item .ico-image {
+    position: absolute;
+    top: 4px;
+    left: 7px;
+    display: block;
+    width: 20px;
+    height: 20px;
+    padding: 4px;
+    border-radius: 15px;
+}
+
+.ico-image > .cabinet-image{
+    width: inherit;
+    border-radius: 50%;
+}
+
+#main #top_menu .item .inactive .icon {
+    opacity: .5;
+}
+
+#main #top_menu .item:nth-child(1) .icon {
+    background-color: #7196ad;
+    border-radius: 5px;
+    top: 5px;
+}
+
+#main #top_menu .item:nth-child(2) .icon {
+    background-color: green;
+}
+
+#main #top_menu .item:nth-child(3) .icon {
+    background-color: blue;
+}
+
+#main #top_menu .item:nth-child(4) .icon {
+    background-color: orange;
+}
+
+#main #top_menu .item:nth-child(5) .icon {
+    background-color: maroon;
+}
+
+#main #top_menu .item .inactive {
+    display: block;
+    padding: 10px;
+    padding-left: 40px;
+    background-color: #ccc;
+    color: #999;
+}
+
+#main #top_menu .item .selected {
+    top: 0;
+    left: 0;
+    color: #555;
+    position: absolute;
+    display: block;
+    padding: 10px;
+    padding-left: 40px;
+    background-color: #fff;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    z-index: 1000;
+    /*box-shadow: inset 0 -5px 15px rgba(0,0,0,.15);*/
+}
+
+#main #tabs_panel {
+    position: relative;
+    height: 85vh;
+    background-color: #fff;
+}
+
+#main #tabs_panel .tabs {
+    position: absolute;
+    top: 95px;
+    left: -50px;
+    transform: rotate(-90deg);
+    height: 30px; 
+    width: 200px;
+    border: 0px solid #e1eaf3;
+    text-align: right;
+    z-index: 1000;
+}
+
+#main #tabs_panel .tabs .tab {
+    display: inline-block;
+    border: 2px solid #e1eaf3;
+    height: 30px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+    line-height: 32px;
+    text-align: center;
+    background-color: #eaf0f7;
+    color: #aaa;
+    /*border-bottom: 2px solid #fff;*/
+}
+
+#main #tabs_panel .tabs .tab.active {
+    background-color: #fff;
+    color: #91a0ad;
+    border-bottom: 2px solid #fff;
+}
+
+#main #tabs_panel .tabs .tab.messages {
+    width: 100px;
+    position: relative;
+    right: -13px;
+}
+
+#main #tabs_panel .tabs .tab.mails {
+    width: 64px;
+}
+
+#main #tabs_panel .panels {
+    position: absolute;
+    top: 10px;
+    left: 67px;
+    bottom: 10px;
+    right: 10px;
+    border: 2px solid #e1eaf3;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 30px;
+    border-bottom-left-radius: 10px;
+    overflow: hidden;
+}
+
+#main #tabs_panel .panels .panel {
+    display: block;
+}
+#main #tabs_panel .panels .panel.mails {
+    display: none;
+}
+#main #tabs_panel .panels .panel.messages {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+#main #tabs_panel .panels .panel > .header {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50px;
+    background-color: #fbf8f8;
+}
+#main #tabs_panel .panels .panel .header .FM_toggle {
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 50px;
+    border-right: 1px solid #ddd;
+    padding: 15px;
+    cursor: pointer;
+    /*background-color: #fff;*/
+}
+
+#main #tabs_panel .panels .panel .header .FM_toggle .fa-folder-open {
+    position: relative;
+    color: #e6d3a5;
+    top: 1px;
+    margin-right: 5px;
+}
+
+#main #tabs_panel .panels .panel .header .FM_toggle .fa-caret-right {
+    position: relative;
+    top: 0px;
+    left: 3px;
+    font-size: 14px;
+}
+
+#main #tabs_panel .panels .panel .header .reload {
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    left: 250px;
+    width: 50px;
+    height: 50px;
+    padding: 15px;
+    cursor: pointer;
+    font-size: 18px;
+    color: #555;
+}
+#main #tabs_panel .panels .panel .header .title {
+    position: absolute;
+    top: 5px;
+    left: 300px;
+    width: 200px;
+    height: 38px;
+    background-color: #eee;
+    text-align: center;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    overflow: hidden;
+}
+
+#main #tabs_panel .panels .panel .header .title .icon {
+    position: absolute;
+    top: 5px;
+    left: 7px;
+    display: block;
+    width: 20px;
+    height: 20px;
+    background-color: green;
+    padding: 4px;
+    border-radius: 15px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+    color: #fff;
+    line-height: 20px;
+}
+
+#main #tabs_panel .panels .panel .header .title .caption {
+    position: absolute;
+    top: 10px;
+    left: 40px;				
+}
+
+#main #tabs_panel .panels .panel .header .search {
+    position: absolute;
+    top: 0;
+    width: 300px;
+    right: 7px;
+    height: 50px;
+    /*background-color: #fff;*/
+}
+
+#main #tabs_panel .panels .panel .header .search .field {
+    position: absolute;
+    top: 5px;
+    left: 0;
+    width: 290px;
+    padding: 5px;
+    height: 26px;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    font-size: 18px;
+}
+
+#main #tabs_panel .panels .panel .columns {
+    display: block;
+    position: absolute;
+    top: 50px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /*border-right: 1px solid #fbf8f8;*/
+}
+#main #tabs_panel .panels .panel .columns .left_column {
+    display: block;
+    position: absolute;
+    top: 0px;
+    left: 0;
+    width: 249px;
+    bottom: 0;
+    border-right: 1px solid #eee;
+    border-top: 1px solid #eee;
+    overflow: hidden;
+}
+#main #tabs_panel .panels .panel .columns .left_column .search {
+    box-sizing: border-box;
+    height: 50px;
+    padding: 10px 5px 10px 10px;
+}
+#main #tabs_panel .panels .panel .columns .left_column .search .field {
+    padding: 5px;
+    width: 190px;
+    height: 16px;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    font-size: 14px;
+}
+#main #tabs_panel .panels .panel .columns .left_column .search .fa-search-plus {
+    color: #555;
+    cursor: pointer;
+    margin-left: 5px;
+    font-size: 18px;
+}
+
+
+#main #tabs_panel .panels .panel .columns .left_column .addresses {
+    box-sizing: border-box;
+    padding: 10px 5px 10px 10px;
+    overflow-y: auto;
+    height: 90%;
+}
+
+#main #tabs_panel .panels .panel .columns .left_column .addresses .item {
+    position: relative;
+    box-sizing: border-box;
+    display: block;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 5px;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+#main #tabs_panel .panels .panel .columns .left_column .addresses .item.active {
+    background-color: #e1eaf3;
+}
+
+#main #tabs_panel .panels .panel .columns .left_column .addresses .item .icon {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-color: green;
+    padding: 4px;
+    border-radius: 15px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+    color: #fff;
+    line-height: 20px;
+}
+
+#main #tabs_panel .panels .panel .columns .left_column .addresses .item:nth-child(2) .icon {
+    background-color: blue;
+}
+
+#main #tabs_panel .panels .panel .columns .left_column .addresses .item:nth-child(3) .icon {
+    background-color: orange;
+}
+
+#main #tabs_panel .panels .panel .columns .left_column .addresses .item:nth-child(4) .icon {
+    background-color: maroon;
+}
+
+#main #tabs_panel .panels .panel .columns .left_column .addresses .item .caption {
+    display: inline-block;
+    margin-left: 10px;
+    color: #555;
+}
+
+#main #tabs_panel .panels .panel .columns .left_column .addresses .item .sub_icon {
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+    width: 15px;
+    height: 15px;
+    border-radius: 7.5px;
+    background-color: #7196ad;
+}
+
+#main #tabs_panel .panels .panel .columns .right_column {
+    display: block;
+    position: absolute;
+    top: 0px;
+    left: 250px;
+    right: 0;
+    bottom: 0;
+}
+
+#main #tabs_panel .panels .panel .columns .right_column .messages {
+    box-sizing: border-box;
+    padding: 10px;
+    height: calc(100% - 150px);
+    overflow-y: scroll;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+}
+
+#main #tabs_panel .panels .panel .columns .right_column .messages .message {
+    position: relative;
+    /*margin-bottom: 20px;*/
+    /*margin-top: 10px;*/
+}
+
+#main #tabs_panel .panels .panel .columns .right_column .messages .message .content {
+    box-sizing: border-box;
+    position: relative;
+    width: 70%;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 0px;
+    overflow: hidden;
+}
+
+			#main #tabs_panel .panels .panel .columns .right_column .messages .message.odd .content {
+				box-sizing: border-box;
+				position: relative;
+				width: 70%;
+				margin-left: 30%;
+				border: 1px solid #ddd;
+				border-radius: 10px;
+				padding: 0px;
+				overflow: hidden;
+			}
+			
+			#main #tabs_panel .panels .panel .columns .right_column .messages .message .content .header {
+				background-color: #eee;
+				box-sizing: border-box;
+				padding: 10px;
+			}
+			
+			#main #tabs_panel .panels .panel .columns .right_column .messages .message .content .header .topic {
+				width: calc(100% - 150px);
+			}
+
+			#main #tabs_panel .panels .panel .columns .right_column .messages .message .content .header .time {
+				position: absolute;
+				right: 10px;
+				top: 10px;
+			}
+
+			#main #tabs_panel .panels .panel .columns .right_column .messages .message .content .body {
+				box-sizing: border-box;
+				padding: 10px;
+				color: #333;
+			}
+
+			#main #tabs_panel .panels .panel .columns .right_column .messages .message .content .attach {
+				background-color: #eee;
+				box-sizing: border-box;
+				padding: 10px;
+				text-align: right;
+			}
+
+			#main #tabs_panel .panels .panel .columns .right_column .messages .message .content .attach i {
+				font-size: 18px;
+				margin: 2px;
+				opacity: .7;
+			}
+
+			#main #tabs_panel .panels .panel .columns .right_column .messages .message .content .attach i.fa-file {
+				color: #99a7b9;
+			}
+
+			#main #tabs_panel .panels .panel .columns .right_column .messages .message .content .attach i.fa-file-word {
+				color: #517acc;
+			}
+
+			#main #tabs_panel .panels .panel .columns .right_column .messages .message .content .attach i.fa-file-excel {
+				color: #4c9266;
+			}
+
+			#main #tabs_panel .panels .panel .columns .right_column .messages .message .content .attach i.fa-file-powerpoint {
+				color: #ec9e20;
+			}
+
+			#main #tabs_panel .panels .panel .columns .right_column .messages .message .content .attach i.fa-file-video {
+				color: #de5c5c;
+			}
+
+			#main #tabs_panel .panels .panel .columns .right_column .messages .message .content .attach i.fa-file-archive {
+				color: #caae40;
+			}
+
+			#main #tabs_panel .panels .panel .columns .right_column .messages .message .controls {
+				box-sizing: border-box;
+				position: absolute;
+				width: 30%;
+				bottom: 0;
+				padding: 10px;
+				top: 0;
+				right: 0;
+			}
+
+			#main #tabs_panel .panels .panel .columns .right_column .messages .message.odd .controls {
+				box-sizing: border-box;
+				position: absolute;
+				width: 30%;
+				bottom: 0;
+				padding: 10px;
+				top: 0;
+				left: 0;
+			}
+
+			#main #tabs_panel .panels .panel .columns .right_column .messages .message .controls .copies {
+				position: absolute;
+				top: 10px;
+			}
+
+			#main #tabs_panel .panels .panel .columns .right_column .messages .message .controls .copies .caption {
+				font-weight: bold;
+			}
+
+			#main #tabs_panel .panels .panel .columns .right_column .messages .message .controls .copies .value {
+				color: #555;
+			}
+
+			#main #tabs_panel .panels .panel .columns .right_column .messages .message .controls .actions {
+				position: absolute;
+				bottom: 10px;
+				font-size: 21px;
+				color: #7196ad;
+			}
+
+			#main #tabs_panel .panels .panel .columns .right_column .messages .message.odd .controls .actions {
+				text-align: right;
+				width: calc(100% - 20px);
+			}
+
+			#main #tabs_panel .panels .panel .columns .right_column .messages .message .controls .actions i {
+				margin: 3px;
+				cursor: pointer;
+			}
+
+			#main #tabs_panel .panels .panel .columns .right_column .compose {
+				position: absolute;
+				height: 150px;
+				bottom: 0;
+				left: 0;
+				right: 0;
+				background-color: #fbf8f8;
+			}
+
+			#main #tabs_panel .panels .panel .columns .right_column .compose .theme {
+				box-sizing: border-box;
+				padding: 5px 0px 5px 8px;
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 200px;
+				height: 20px;
+				font-size: 14px;
+			}
+
+			#main #tabs_panel .panels .panel .columns .right_column .compose .theme .caption {
+				font-weight: bold;
+			}
+
+			#main #tabs_panel .panels .panel .columns .right_column .compose .theme .topic {
+				color: #555;
+			}
+
+			#main #tabs_panel .panels .panel .columns .right_column .compose .editor {
+				position: absolute;
+				top: 20px;
+				left: 0;
+				right: 120px;
+				bottom: 0;
+
+			}
+            
+            .attachedfiles {
+                position: absolute;
+				top: 105px;
+				left: 8px;
+				bottom: 0;
+                width: 80%;
+                font-size: 11px;
+                overflow-y: auto;
+			}
+
+			#main #tabs_panel .panels .panel .columns .right_column .compose .editor .field {
+				position: absolute;
+				top: 15px;
+				left: 5px;
+				right: 5px;
+				bottom: 5px;
+				width: 100%;
+				border: 1px solid #eee;
+				border-radius: 5px;
+				box-sizing: border-box;
+    			padding: 10px;
+    			font-size: 16px;
+			}
+            
+            .topic input{
+                width: 60%;
+            }
+
+			#main #tabs_panel .panels .panel .columns .right_column .compose .actions_icons {
+				position: absolute;
+				top: 22px;
+				right: 4px;
+				width: 100px;
+				color: #555;
+				font-size: 20px;
+				cursor: pointer;
+			}
+
+			#main #tabs_panel .panels .panel .columns .right_column .compose .actions_icons .fas {
+				margin: 5px;
+			}
+
+			#main #tabs_panel .panels .panel .columns .right_column .compose .send_button {
+				position: absolute;
+				top: 112px;
+				right: 33px;
+				width: 65px;
+				height: 28px;
+			    border-top-left-radius: 5px;
+			    border-top-right-radius: 20px;
+			    border-bottom-right-radius: 20px;
+			    border-bottom-left-radius: 5px;
+				border: 2px solid #bbb;
+				background-color: #e1eaf3;
+				cursor: pointer;
+			}
+
+			#main #tabs_panel .panels .panel .columns .right_column .compose .send_button .fa-envelope {
+				position: absolute;
+				top: -2px;
+				left: 2px;
+				font-size: 32px;
+				color: #555;
+			}
+
+			#main #tabs_panel .panels .panel .columns .right_column .compose .send_button .fa-arrow-circle-up {
+				position: absolute;
+				top: 1px;
+				left: 37px;
+				font-size: 26px;
+				color: #555;
+			}
+
+			footer {
+				padding: 20px 20px 0px 70px;
+				font-size: 12px;
+				color: #888;
+			}
+
+			footer .copyright {
+				display: inline-block;
+				background-color: #ddd;
+				border-radius: 5px;
+				padding: 2px 10px;
+			}
+            
+            .deep-dirs > li label::hover {
+                cursor: pointer;
+            }
+
+            .tree-dir::before{
+                content: url("../images/icons/directory-icon.png");
+                position: relative;
+            }
+                    
+            .deep-dirs > li {
+              margin-left: 0.1em;
+              padding: 0 0 0 1em;
+              cursor: pointer;
+              margin-bottom: 0.6em;
+              margin-top: 2.5%;
+            }
+            
+            .deep-dirs > li:hover {
+              color: #009DD6;
+            }
+
+            .span-share-add-info{
+                font-size: 100%;
+            }
+
+            /*.deep-dirs > li:before {
+              content: url("../images/icons/directory-icon.png");
+              position: relative;
+              top: 0.5em;
+            }*/
+
+
+            .deep-dirs > li label::before {
+                cursor: pointer;
+                position: relative;
+                top: 0.7em;
+                content:"";
+                border: solid black;
+                border-width: 0 2px 2px 0;
+                padding-left: 0%;
+                padding-right: 0%;
+                color: #000;
+                font-size: 17px;
+                font-weight: bold;
+                border-radius: 0px;
+                width: 0.5em;
+                height: 0.5em;
+                line-height: 0.9em;
+                float: left;
+                /*border: 1px solid #ffd315;*/
+                text-align: center;
+                /* display: inline-block; */
+                transform: rotate(-45deg);
+                -webkit-transform: rotate(-45deg);
+                margin-right: 1%;
+            }
+            
+            .deep-dirs > li label{
+                font-size: 0px;
+            }
+            
+            .tree-li-before ul li label{
+                margin-top: -0.9%;
+            }
+
+            .deep-dirs input[type=checkbox]:checked ~ ul {
+                display: block;
+            }
+
+            .deep-dirs input[type=checkbox] ~ ul {
+                display: none;
+            }
+
+            .deep-dirs input[type=checkbox]:checked ~ div label::before {
+                /*content: '-';*/
+                -ms-transform: rotate(45deg); /* IE 9 */
+                -webkit-transform: rotate(45deg); /* Safari */
+                transform: rotate(45deg);
+            }
+
+            .deep-dirs input[type=checkbox] ~ nobr label::before {
+                content: '\27A4';
+            }
+
+            .deep-dirs input[type=checkbox] {
+                opacity: 0;
+                top: -9999px;
+                left: -9999px;
+                position: absolute;
+                margin-left: 0.1%;
+                margin-top: 0.2%;
+                z-index: 1;
+            }
+
+            .deep-dirs li span{
+                position: relative;
+                display: inline-block;
+                background: #fff;
+                margin-left: 2%;
+                padding-top: 2%;
+                padding-bottom: 2%;
+            }
+
+            .deep-dirs input[type=checkbox] ~ .deep-dirs li span::after{
+              position: absolute;
+              top: 0;
+              left: -1.5em;
+              display: block;
+              height: 0.5em;
+              width: 1em;
+              border-bottom: 1px solid #777;
+              border-left: 1px solid #777;
+              border-radius: 0 0 0 .3em;
+              content: '';
+            }
+
+            .deep-dirs li:last-child::before{
+                height: 1em;
+              bottom: auto;
+            }
+
+            .deep-dirs{
+                margin-top: 6%;
+            }
+            
+            .filesystem-header-buttons-container{
+                height: 100%;
+                width: 80%;
+                background-color: #f5f5f5;
+                display: flex;
+            }
+
+            .filesystem-navigator-docs-dir::before {
+              content: url("../images/icons/directory-icon.png");
+              margin-left: -3%;
+            }
+            .filesystem-navigator-shared-dir::before {
+              content: url("../images/icons/directory-icon.png");
+              margin-left: -3%;
+            }
+            .filesystem-navigator-dir::before {
+              content: url("../images/icons/directory-icon.png");
+              margin-left: -3%;
+            }
+            .filesystem-navigator-dir-active {
+              background: #009DD6;
+            }
+            .filesystem-navigator-dir-active::before {
+              content: url("../images/icons/directory-icon.png");
+              margin-left: -3%;
+            }
+            .filesystem-navigator-file::before {
+              content: url("../images/icons/file-icon.png");
+              margin-left: -3%;
+            }
+            .filesystem-navigator-css::before {
+              content: url("../images/icons/css-icon.png");
+              margin-left: -3%;
+            }
+            .filesystem-navigator-csv::before {
+              content: url("../images/icons/csv-icon.png");
+              margin-left: -3%;
+            }
+            .filesystem-navigator-html::before {
+              content: url("../images/icons/html-icon.png");
+              margin-left: -3%;
+            }
+            .filesystem-navigator-ttf::before {
+              content: url("../images/icons/ttf-icon.png");
+              margin-left: -3%;
+            }
+            .filesystem-navigator-email::before {
+              content: url("../images/icons/eml-icon.png");
+              margin-left: -3%;
+            }
+            .filesystem-navigator-mp4::before {
+              content: url("../images/icons/mp4-icon.jpg");
+              margin-left: -3%;
+            }
+            .filesystem-navigator-mp3::before {
+              content: url("../images/icons/mp3-icon.jpg");
+              margin-left: -3%;
+            }
+            .filesystem-navigator-wav::before {
+              content: url("../images/icons/wav-icon.png");
+              margin-left: -3%;
+            }
+            .filesystem-navigator-avi::before {
+              content: url("../images/icons/avi-icon.jpg");
+              margin-left: -3%;
+            }
+            .filesystem-navigator-jpeg::before {
+              content: url("../images/icons/jpeg-icon.png");
+              margin-left: -3%;
+            }
+            .filesystem-navigator-png::before {
+              content: url("../images/icons/png-icon.png");
+              margin-left: -3%;
+            }
+            .filesystem-navigator-pdf::before {
+              content: url("../images/icons/pdf-icon.png");
+              margin-left: -3%;
+            }
+            .filesystem-navigator-djvu::before {
+              content: url("../images/icons/djvu-icon.png");
+              margin-left: -3%;
+            }
+            .filesystem-navigator-postscript::before {
+              content: url("../images/icons/eps-icon.png");
+              margin-left: -3%;
+            }
+            .filesystem-navigator-doc::before {
+              content: url("../images/icons/doc-icon.png");
+              margin-left: -3%;
+            }
+            .filesystem-navigator-xls::before {
+              content: url("../images/icons/xls-icon.png");
+              margin-left: -3%;
+            }
+            .filesystem-navigator-ppt::before {
+              content: url("../images/icons/ppt-icon.png");
+              margin-left: -3%;
+            }
+            .filesystem-navigator-xml::before {
+              content: url("../images/icons/fb2-icon.png");
+              margin-left: -3%;
+            }
+            .filesystem-navigator-rtf::before {
+              content: url("../images/icons/rtf-icon.png");
+              margin-left: -3%;
+            }
+            .filesystem-navigator-7z::before {
+              content: url("../images/icons/7z-icon.png");
+              margin-left: -3%;
+            }
+            .filesystem-navigator-zip::before {
+              content: url("../images/icons/zip-icon.png");
+              margin-left: -3%;
+            }
+            .filesystem-navigator-rar::before {
+              content: url("../images/icons/rar-icon.png");
+              margin-left: -3%;
+            }
+            .filesystem-navigator-undef::before {
+              content: url("../images/icons/fu.png");
+              margin-left: -3%;
+            }
+
+
+
+
+
+            .filesystem-navigator-left-undef {
+              background-image: url("../images/icons/fu.png");
+              background-size: cover;
+              background-repeat: no-repeat;
+              background-position: center;
+              width: 17px;
+              height: 17px;
+            }
+            .filesystem-navigator-left-docs-dir {
+              background-image: url("../images/icons/directory-icon.png");
+              background-size: cover;
+              background-repeat: no-repeat;
+              background-position: center;
+              width: 17px;
+              height: 17px;
+            }
+            .filesystem-navigator-left-shared-dir {
+              background-image: url("../images/icons/directory-icon.png");
+              background-size: cover;
+              background-repeat: no-repeat;
+              background-position: center;
+              width: 17px;
+              height: 17px;
+            }
+            .filesystem-navigator-left-dir {
+              background-image: url("../images/icons/directory-icon.png");
+              background-size: cover;
+              background-repeat: no-repeat;
+              background-position: center;
+              width: 17px;
+              height: 17px;
+            }
+            .filesystem-navigator-left-file {
+              background-image: url("../images/icons/file-icon.png");
+              background-size: cover;
+              background-repeat: no-repeat;
+              background-position: center;
+              width: 17px;
+              height: 17px;
+            }
+            .filesystem-navigator-left-css {
+              background-image: url("../images/icons/css-icon.png");
+              background-size: cover;
+              background-repeat: no-repeat;
+              background-position: center;
+              width: 17px;
+              height: 17px;
+            }
+            .filesystem-navigator-left-csv {
+              background-image: url("../images/icons/csv-icon.png");
+              background-size: cover;
+              background-repeat: no-repeat;
+              background-position: center;
+              width: 17px;
+              height: 17px;
+            }
+            .filesystem-navigator-left-html {
+              content: url("../images/icons/html-icon.png");
+              background-size: cover;
+              background-repeat: no-repeat;
+              background-position: center;
+              width: 17px;
+              height: 17px;
+            }
+            .filesystem-navigator-left-ttf {
+              background-image: url("../images/icons/ttf-icon.png");
+              background-size: cover;
+              background-repeat: no-repeat;
+              background-position: center;
+              width: 17px;
+              height: 17px;
+            }
+            .filesystem-navigator-left-email {
+              background-image: url("../images/icons/eml-icon.png");
+              background-size: cover;
+              background-repeat: no-repeat;
+              background-position: center;
+              width: 17px;
+              height: 17px;
+            }
+            .filesystem-navigator-left-mp4 {
+              background-image: url("../images/icons/mp4-icon.jpg");
+              background-size: cover;
+              background-repeat: no-repeat;
+              background-position: center;
+              width: 17px;
+              height: 17px;
+            }
+            .filesystem-navigator-left-mp3 {
+              background-image: url("../images/icons/mp3-icon.jpg");
+              background-size: cover;
+              background-repeat: no-repeat;
+              background-position: center;
+              width: 17px;
+              height: 17px;
+            }
+            .filesystem-navigator-left-wav {
+              background-image: url("../images/icons/wav-icon.png");
+              background-size: cover;
+              background-repeat: no-repeat;
+              background-position: center;
+              width: 17px;
+              height: 17px;
+            }
+            .filesystem-navigator-left-avi {
+              background-image: url("../images/icons/avi-icon.jpg");
+              background-size: cover;
+              background-repeat: no-repeat;
+              background-position: center;
+              width: 17px;
+              height: 17px;
+            }
+            .filesystem-navigator-left-jpeg {
+              background-image: url("../images/icons/jpeg-icon.png");
+              background-size: cover;
+              background-repeat: no-repeat;
+              background-position: center;
+              width: 17px;
+              height: 17px;
+            }
+            .filesystem-navigator-left-png {
+              background-image: url("../images/icons/png-icon.png");
+              background-size: cover;
+              background-repeat: no-repeat;
+              background-position: center;
+              width: 17px;
+              height: 17px;
+            }
+            .filesystem-navigator-left-pdf {
+              background-image: url("../images/icons/pdf-icon.png");
+              background-size: cover;
+              background-repeat: no-repeat;
+              background-position: center;
+              width: 17px;
+              height: 17px;
+            }
+            .filesystem-navigator-left-djvu {
+              background-image: url("../images/icons/djvu-icon.png");
+              background-size: cover;
+              background-repeat: no-repeat;
+              background-position: center;
+              width: 17px;
+              height: 17px;
+            }
+            .filesystem-navigator-left-postscript {
+              background-image: url("../images/icons/eps-icon.png");
+              background-size: cover;
+              background-repeat: no-repeat;
+              background-position: center;
+              width: 17px;
+              height: 17px;
+            }
+            .filesystem-navigator-left-doc {
+              background-image: url("../images/icons/doc-icon.png");
+              background-size: cover;
+              background-repeat: no-repeat;
+              background-position: center;
+              width: 17px;
+              height: 17px;
+            }
+            .filesystem-navigator-left-xls {
+              background-image: url("../images/icons/xls-icon.png");
+              background-size: cover;
+              background-repeat: no-repeat;
+              background-position: center;
+              width: 17px;
+              height: 17px;
+            }
+            .filesystem-navigator-left-ppt {
+              background-image: url("../images/icons/ppt-icon.png");
+              background-size: cover;
+              background-repeat: no-repeat;
+              background-position: center;
+              width: 17px;
+              height: 17px;
+            }
+            .filesystem-navigator-left-xml {
+              background-image: url("../images/icons/fb2-icon.png");
+              background-size: cover;
+              background-repeat: no-repeat;
+              background-position: center;
+              width: 17px;
+              height: 17px;
+            }
+            .filesystem-navigator-left-rtf {
+              background-image: url("../images/icons/rtf-icon.png");
+              background-size: cover;
+              background-repeat: no-repeat;
+              background-position: center;
+              width: 17px;
+              height: 17px;
+            }
+            .filesystem-navigator-7z {
+              background-image: url("../images/icons/7z-icon.png");
+              background-size: cover;
+              background-repeat: no-repeat;
+              background-position: center;
+              width: 17px;
+              height: 17px;
+            }
+            .filesystem-navigator-left-zip {
+              background-image: url("../images/icons/zip-icon.png");
+              background-size: cover;
+              background-repeat: no-repeat;
+              background-position: center;
+              width: 17px;
+              height: 17px;
+            }
+            .filesystem-navigator-left-rar {
+              background-image: url("../images/icons/rar-icon.png");
+              background-size: cover;
+              background-repeat: no-repeat;
+              background-position: center;
+              width: 17px;
+              height: 17px;
+            }
+            
+            .subchats{
+                display: none;
+            }
+            
+            .attachedfiles-drop {
+                font-size: 20px;
+                padding-top: 10px;
+                text-align: center;
+                display: block;
+                width: 100%;
+                height: 100%;
+                background-color: #e0e3de;
+                color:black;
+            }
+
+            .warning{
+            	display:none
+            }
+
+            .notify-check{
+                display: none;
+            }
+
+            .borderdiv {
+            	border: 2px solid #d3d3d3;
+            	border-radius: 12px;
+            }
+
+            .clear{
+            	line-height: 20px;
+            }
+            
+		</style>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="/static/src/messenger/jquery-dateformat.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.contextMenu.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.ui.position.js"></script>
+
+	</head>
+	<body>
+            <header class="filesystem-header-header">
+                    <div class="filesystem-header-buttons">
+                    <div class="filesystem-logo">
+                        <a href="#"><img src="{% static '/images/myBiz-logo-horisont.png' %}"/></a>
+                    </div>
+            
+                    <!--<div class="filesystem-header-buttons">-->
+                     <!--<div class="filesystem-header-buttons-container">
+                            <a href="#" class="header-button files">
+                                <div class="header-buttons">
+                                    <img src="{% static '/images/icons/files.png' %}" alt="File icon" />
+                                    <span class="inside-header-text">Файли та їх оборот</span>
+                                </div>
+                            </a> -->
+            
+                            <!-- <div class="notifications-block">
+                                <div class="notifications-icon">
+                                    <img src="{% static 'images/icons/yellow-folder.png' %}" alt="" class="notifications-image">
+                                </div>
+                                
+                                <a href="../filemanager/documents">
+                                    <span class="notifications-title">Документообіг</span>
+                                </a>
+                            </div> -->
+            
+                            <!--<a href="#" class="header-button mail">
+                                <div class="header-buttons">
+                                    <img src="{% static '/images/icons/main-mail.png' %}" alt="Mail icon">
+                                    <span class="inside-header-text">Пошта</span>
+                                </div>
+                            </a>
+            
+            
+                            <a href="../cabinet" class="header-button register">
+                                <div class="header-buttons">
+                                    <img src="{% static '/images/icons/register.png' %}" alt="Register icon">
+                                    <span class="inside-header-text">Реєстрація та внесення змін</span>
+                                </div>
+                            </a>
+                        </div> -->   
+            
+                            <!--<div class="filesystem-search">-->
+                                <!--<input type="text" placeholder="Пошук">-->
+                                <!--<i class="fas fa-search fa-lg"></i>-->
+                            <!--</div>-->
+                        <div class="filesystem-header-right">
+                        <div class="filesystem-icons">
+                                <!-- <img src="{% static '/images/icons/mail-icons.png' %}"> -->
+                                <a href="/filemanager/">
+                                    <img src="{% static '/images/icons/info-icon.png' %}">
+                                </a>
+                                <a href="/messenger/">
+                                    <img src="{% static '/images/icons/mail-icon.png' %}">
+                                </a>
+                        </div>
+                        <div class="filesystem-profile">
+                        <!--<img class="user-image" src="{% static '/images/icons/user-image-icon.png' %}" />-->
+                            {% if user.avatar %}
+                                <img src="{{ user.avatar.url }}" alt="" class="cabinet-image">
+                            {% else %}
+                                <img src="{% static '/static/images/default-user.png' %}" alt="" class="cabinet-image">
+                            {% endif %}
+                        <span class="profile-number">{{user.username}}</span>
+            
+                        <div class="profile-buttons">
+                            <a href="../cabinet">
+                                <img class="settings-button" src="{% static '/images/icons/settings-icon.png' %}" />
+                            </a>
+                             <a href="../logout">
+                                <img class="on-off-button" src="{% static '/images/icons/onn-off-icon.png' %}" />
+                            </a>
+                        </div>
+                    </div>
+                    </div>
+                    </div>
+            </header> 
+	<section id="main">
+
+		<section id="top_menu">
+                <div class="item" data-id="-1">
+                    <a href="#modal-add-email" rel="modal:open">
+                        <div class="inactive"><span class="icon">+</span><span class="caption">+</a></div>
+                        <div class="selected magictime"><span class="icon">+</span><span class="caption">+</span></div>
+                    </a>
+				</div>
+				<div class="item active" data-id="0">
+					<div class="inactive">
+                        {% if user.avatar %}
+                            <span class="ico-image">
+                                <img src="{{ user.avatar.url }}" alt="" class="cabinet-image">
+                            </span>
+                        {% else %}
+                            <span class="ico-image">
+                                <img src="images/default-user.png" alt="" class="cabinet-image">
+                            </span>
+                        {% endif %}
+
+                        <span class="caption">All</span>
+                    </div>
+					<div class="selected magictime">
+                        {% if user.avatar %}
+                            <span class="ico-image">
+                                <img src="{{ user.avatar.url }}" alt="" class="cabinet-image">
+                            </span>
+                        {% else %}
+                            <span class="ico-image">
+                                <img src="images/default-user.png" alt="" class="cabinet-image"
+                            ></span>
+                        {% endif %}
+                        <span class="caption">All</span>
+                    </div>
+				</div>
+<!--
+				<div class="item" data-id="1">
+					<div class="inactive"><span class="icon">A</span><span class="caption">info_1@mail.com</span></div>
+					<div class="selected magictime"><span class="icon">A</span><span class="caption">info_1@mail.com</span></div>
+				</div>
+				<div class="item" data-id="2">
+					<div class="inactive"><span class="icon">B</span><span class="caption">info_2@mail.com</span></div>
+					<div class="selected magictime"><span class="icon">B</span><span class="caption">info_2@mail.com</span></div>
+				</div>
+				<div class="item" data-id="3">
+					<div class="inactive"><span class="icon">C</span><span class="caption">info_3@mail.com</span></div>
+					<div class="selected magictime"><span class="icon">C</span><span class="caption">info_3@mail.com</span></div>
+				</div>
+				<div class="item" data-id="4">
+					<div class="inactive"><span class="icon">D</span><span class="caption">info_4@mail.com</span></div>
+					<div class="selected magictime"><span class="icon">D</span><span class="caption">info_4@mail.com</span></div>
+				</div>
+-->
+			</section>
+			<section id="tabs_panel">
+				<div class="tabs">
+					<div class="tab messages active">Messages</div>
+					<div class="tab mails">Mails</div>
+				</div>
+				<div class="panels">
+					<div class="panel mails"></div>
+					<div class="panel messages">
+						<div class="header">
+							<div class="FM_toggle" id="fmfilesbdiv">
+
+								<span><i class="fas fa-folder-open"></i>Files</span>
+								
+								<i class="fas fa-caret-right"></i>
+								<!-- <i class="fas fa-caret-down"></i> -->
+							</div>
+							<div class="reload">
+								<i class="fas fa-redo-alt"></i>
+							</div>
+							<div id="header-mails">
+<!--
+                                <div class="title magictime">
+                                    <span class="icon">A</span><span class="caption">info_1@mail.com</span>
+                                </div>
+                                <div class="title magictime" style="left:510px">
+                                    <span class="icon">A</span><span class="caption">info_1@mail.com</span>
+                                </div>
+-->
+							</div>
+							<div class="search">
+								<input type="text" class="field"/>
+							</div>
+						</div>
+						<div class="columns">
+							<div class="left_column">
+                                <div id="chats" style="height:100%">
+                                    <div class="search">
+                                        <input type="text" class="field" id="inputaddchat"/>
+                                        <i class="fas fa-search-plus" id="submitaddchat"></i>	
+                                    </div>
+                                    <div class="addresses">
+    <!--
+                                        <div class="item active" data-id="1">
+                                            <span class="icon">A</span><span class="caption">info_1@mail.com</span><span class="sub_icon"></span>
+                                        </div>
+                                        <div class="item" data-id="2">
+                                            <span class="icon">B</span><span class="caption">info_2@mail.com</span><span class="sub_icon"></span>
+                                        </div>
+                                        <div class="item"  data-id="3">
+                                            <span class="icon">C</span><span class="caption">info_3@mail.com</span><span class="sub_icon"></span>
+                                        </div>
+                                        <div class="item" data-id="4">
+                                            <span class="icon">D</span><span class="caption">info_4@mail.com</span><span class="sub_icon"></span>
+                                        </div>
+    -->
+                                    </div>
+                                </div>
+                                <div id="files" style="height:100%">
+                                    <ul class="deep-dirs"></ul>
+                                </div>
+							</div>
+<!--
+                            <div class="left_column" id="files">
+-->
+<!--
+                            </div>
+-->
+							<div class="right_column">
+								<div class="messages" id="messages" ondragover="allowDropFile(event)" ondrop="dropFile(event)">
+
+<!--
+									<div class="message even">
+										<div class="content">
+											<div class="header">
+												<div class="topic">Lorem ipsum!</div>
+												<div class="time">
+													16:45 01.01.2019
+												</div>
+											</div>
+											<div class="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+											<div class="attach">
+												<i class="fas fa-file"></i>
+												<i class="fas fa-file-word"></i>
+												<i class="fas fa-file-excel"></i>
+												<i class="fas fa-file-powerpoint"></i>
+												<i class="fas fa-file-video"></i>
+												<i class="fas fa-file-archive"></i>
+											</div>
+										</div>
+										<div class="controls">
+											<div class="copies"><span class="caption">Copies:</span><span class="value">12345@ukr.net, in@l.ua, dfa@gmail.com</span></div>
+											<div class="actions">
+												<i class="fas fa-reply"></i>
+												<i class="fas fa-reply-all"></i>
+												<i class="fas fa-share-square"></i>
+												<i class="fas fa-trash-alt"></i>
+											</div>
+										</div>
+									</div>
+									
+									<div class="message odd">
+										<div class="content">
+											<div class="header">
+												<div class="topic">Lorem ipsum!</div>
+												<div class="time">
+													16:45 01.01.2019
+												</div>
+											</div>
+											<div class="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+											<div class="attach">
+												<i class="fas fa-file"></i>
+												<i class="fas fa-file-word"></i>
+												<i class="fas fa-file-excel"></i>
+												<i class="fas fa-file-powerpoint"></i>
+												<i class="fas fa-file-video"></i>
+												<i class="fas fa-file-archive"></i>
+											</div>
+										</div>
+										<div class="controls">
+											<div class="copies"><span class="caption">Copies:</span><span class="value">12345@ukr.net, in@l.ua, dfa@gmail.com</span></div>
+											<div class="actions">
+												<i class="fas fa-reply"></i>
+												<i class="fas fa-reply-all"></i>
+												<i class="fas fa-share-square"></i>
+												<i class="fas fa-trash-alt"></i>
+											</div>
+										</div>
+									</div>
+
+									<div class="message even">
+										<div class="content">
+											<div class="header">
+												<div class="topic">Lorem ipsum!</div>
+												<div class="time">
+													16:45 01.01.2019
+												</div>
+											</div>
+											<div class="body">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+											<div class="attach">
+												<i class="fas fa-file"></i>
+												<i class="fas fa-file-word"></i>
+												<i class="fas fa-file-excel"></i>
+												<i class="fas fa-file-powerpoint"></i>
+												<i class="fas fa-file-video"></i>
+												<i class="fas fa-file-archive"></i>
+											</div>
+										</div>
+										<div class="controls">
+											<div class="copies"><span class="caption">Copies:</span><span class="value">12345@ukr.net, in@l.ua, dfa@gmail.com</span></div>
+											<div class="actions">
+												<i class="fas fa-reply"></i>
+												<i class="fas fa-reply-all"></i>
+												<i class="fas fa-share-square"></i>
+												<i class="fas fa-trash-alt"></i>
+											</div>
+										</div>
+									</div>
+-->
+
+								</div>
+								<div class="compose">
+									<div class="theme">
+										<span class="caption">Subject:</span>
+										<span class="topic"><input type="text" id="inputsubject"></span>
+									</div>
+									<div class="editor">
+										<textarea class="field"></textarea>
+                                        <input type="file" name="files[]" style="display:none" id="filesinput" multiple="true">
+									</div>
+                                    <div id="attachedfiles" class="attachedfiles" ondragover="allowDropFile(event)" ondrop="dropFile(event)"></div>
+									<div class="actions_icons">
+										<i class="fas fa-paperclip" id="selectfiles"></i>
+										<i class="fas fa-microphone"></i>
+										<i class="fas fa-video"></i>
+										<i class="fas fa-camera"></i>
+										<i class="far fa-image"></i>
+									</div>
+									<div class="send_button magictime">
+										<i class="fas fa-envelope"></i>
+										<i class="fas fa-arrow-circle-up"></i>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+
+<!--		<footer><span class="copyright">MyBiz.in.ua &copy;2019</span></footer>-->
+        
+        <div class="modal" id="modal-add-email">
+            <label for="email-login">E-mail</label>
+                <input type="email" id="email-login" style="margin-left:4.5%;"><br><br>
+            <label for="email-password">Пароль</label>
+                <input type="password" id="email-password" style="margin-left:2.5%"><br><br>
+            <input type="submit" value="Добавити" id="email-submit"><br><br>
+            <span class="error" id="test-error"></span>
+            <div class="notify-check" id="notify-check">
+                Зачекайте будь-ласка! Проводиться тестування авторизації та відправки<br>
+            </div>
+			<div class="warning" id="gmail-warning">
+				<font color="red">УВАГА!</font> Перед спробою авторизації, увімкніть "Доступ для менш безпечних додатків" по
+					лінку <a href="https://myaccount.google.com/lesssecureapps">https://myaccount.google.com/lesssecureapps</a>.<br>
+				Після цього, спробуйте авторизуватись. Якщо після цього виникне помилка авторизації, на Вашу поштову скриньку прийде повідомлення
+					із "Сповіщенням від системи безпепки", в якому ви повинні підтвердити що це були Ви. Після цього авторизація в нашому сервісі
+					повинна пройти успішно
+			</div>
+        </div>
+		<script>
+
+            //var host = 'http://127.0.0.1:8000';
+            var host = '';
+            var filesForUpload = [];
+            var last_html_attached_files = "";
+
+			window.mc = { // Mail client
+				addr: [
+					{
+						id: 1,
+						letter: "A",
+						color: "green",
+						mail:"1_info@mail.com"
+					},
+					{
+						id: 2,
+						letter: "B",
+						color: "blue",
+						mail:"2_info@mail.com"
+					},
+					{
+						id: 3,
+						letter: "C",
+						color: "orange",
+						mail:"3_info@mail.com"
+					},
+					{
+						id: 4,
+						letter: "D",
+						color: "maroon",
+						mail:"4_info@mail.com"
+					},
+				]
+			}
+
+
+            function clickFile(obj){
+                console.log($(obj).attr('url'));
+                window.location.href = $(obj).attr('url');
+            }
+
+            window.addEventListener("message", function(e){
+                console.log(e);
+                $('#files').append($('<ul class="deep-dirs"></ul>').html(e.data));
+
+            }, false);
+
+            function resizeIframe(obj) {
+                obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+            }
+
+            function startDragFile(ev){
+                ev.dataTransfer.setData('text', "nodename" + ev.target.getAttribute('nodename') + ";;;class" + $(ev.target).prev().attr("class"));
+                console.log($(ev.target).prev().attr("class"));
+                last_html_attached_files = $("#attachedfiles").html();
+                $("#attachedfiles").html("<div  class='attachedfiles-drop'>Перетягніть файл сюди для того щоб додати його до повідомлення</div>");
+            }
+
+            function allowDropFile(ev){
+                ev.preventDefault();
+                console.log("DROP FILE");
+            }
+
+            wo = function(data){
+                window.open(data, "_blank");
+            };
+
+            function removeUploadFile(obj){
+                obj.parentNode.parentNode.removeChild(obj.parentNode);
+            }
+
+            function endDrag(ev){
+                $("#attachedfiles").html(last_html_attached_files);
+            }
+
+            function dropFile(ev){
+                ev.preventDefault();
+                val = ev.dataTransfer.getData("text");
+                target = $(ev.target);
+                $("#attachedfiles").html(last_html_attached_files);
+                if( val.substr(0, 8) != "nodename" ) return;
+                val = val.split(';;;');
+                clsname = val[1].substr(5);
+                val = val[0];
+                val = val.substr(8);
+                cid = $('.selectcompanies').children('option:selected').val();
+                fetch(host + '/filemanager/router/?mode=downloadFile&cid=' + cid + '&filename=' + encodeURIComponent(val) + '&path=', {
+                    method: 'GET',
+                    credentials: 'include'
+                }).then(resp => resp.blob()).then(function(d){
+                    console.log(d);
+                    fn = val.split('/').splice(-1)[0];
+                    if( target.attr("id") == "messages" ){
+                        filesForUpload.push({'file': d, 'name': fn});
+                        $(".send_button").click();
+                    }else{
+                        $('#attachedfiles').append("<span style='cursor: pointer;font-size:14px'><i class='" + clsname +
+                            "' title='" + val +
+                            "'></i><sp onclick='wo(\"" +
+                            host + '/filemanager/router/?mode=downloadFile&cid=' + cid + '&filename=' +
+                            encodeURIComponent(val) + '&path=' + "\")'>" +
+                            "</sp> <sup style='color:red;font-size:21px' onclick='removeUploadFile(this)' " +
+                            ">x</sup>, </span>"
+                        );
+                        filesForUpload.push({'file': d, 'name': fn});
+                    }
+                });
+            }
+
+			$(document).ready(function () {
+				console.log('ready');
+                var currentemailid = 0;
+                var currentchatid = 0;
+                var fetchInverval = null;
+                var currentemail = null;
+                var listenersActive = false;
+                var currentsubject = null;
+                var currentreplytext = '';
+
+
+				// Top Menu
+
+                //fetch(host + '/login/',
+                    //{
+                        //'method': 'POST',
+                        //body: 'login=' + encodeURIComponent('alen28@i.ua') + '&password=1',
+                        //headers:
+                            //{
+                                //'Content-type': 'application/x-www-form-urlencoded'
+                        //},
+                        //credentials: 'include'
+                    //});
+
+                function testEmail(){
+                	if( $('#email-login').val().indexOf('gmail.com') != -1 ){
+                		$('#gmail-warning').show();
+                	}
+                	$('#notify-check').show();
+                    fetch(host + '/messenger/api/testEmail/', {
+                        credentials: 'include',
+                        method: 'POST',
+                        body: JSON.stringify({
+                            'email': $('#email-login').val(),
+                            'password': $('#email-password').val(),
+                            'short_name': 'A',
+                        }),
+                        headers:{
+                            'Content-type': 'application/json'
+                        }
+                    }).then(resp => resp.json()).then(function(j){
+                        $('#notify-check').hide();
+                        if( j.status == 200 ){
+                            addEmail($('#email-login').val(), $('#email-password').val());
+                        }else if( j.cansend == 0 ){
+                            alert("Авторизація пройшла успішно.\nПроте сервер відхилив відправку повідомленнь.\nВідправка повідомленнь з цього акаунта відключена");
+                            addEmail($('#email-login').val(), $('#email-password').val());
+                        }else{
+                            $('#test-error').text(j.message);
+                        }
+                    });
+                }
+
+                function addEmail(email, password){
+                    fetch(host + '/messenger/api/editEmail/', {
+                        credentials: 'include',
+                        method: 'POST',
+                        body: JSON.stringify({
+                            'email': email,
+                            'password': password,
+                            'short_name': 'A',
+                        }),
+                        headers:{
+                            'Content-type': 'application/json'
+                        }
+                    }).then(resp => resp.json()).then(function(j){
+                        if( j.status == 201 ){
+                            $('#email-login').val('');
+                            $('#email-password').val('');
+                            $('#test-error').text('');
+                            window.location.reload();
+                            //fetchEmails();
+                        }else if( j.message == 'Email exists' ){
+                            $('#test-error').text('Такий email вже доданий');
+                        }
+                    });
+                }
+
+
+                function switchChatsFiles(){
+                    console.log($('#chats').css('display'));
+                    if( $('#chats').css('display') == 'block' ){
+                        console.log($('#chats').css('width'));
+                        //$('#chats').animate({'left': '+=' + $('#chats').css('width').replace('px', '')}, 400, function(){$('#chats').hide();});
+                        //$('#files').animate({'left': '+=' + $('#files').css('width').replace('px', '')}, 400);
+                        $('#chats').hide();
+                        $('#files').show();
+                    }else{
+                        $('#chats').show();
+                        $('#files').hide();
+                        //$('#files').animate({'left': '-=' + $('#files').css('width').replace('px', '')}, 400, function(){$('#files').hide()});
+                        //$('#chats').animate({'left': '-=' + $('#chats').css('width').replace('px', '')}, 100);
+                    }
+                }
+
+                //console.log(document.styleSheets);
+
+
+                function fetchUserFiles(){
+                    fetch(host + '/cabinet/get_company_dfs_list/', {credentials: 'include'}).then(rep => rep.json()).then(
+                        function(json){
+                            switchChatsFiles();
+                            $('#files').html('');
+                            let div = $('<div></div>');
+                            let sel = $('<select class="selectcompanies"></select>');
+                            sel.append($('<option></option>', {value: -1, text: 'Виберіть'}));
+                            sel.append($('<option></option>', {value: 0, text: 'Я'}));
+                            for( let i=0; i < json.reply.length; i++ ){
+                                let opt = $('<option></option>', {value: json.reply[i].id, text: json.reply[i].name});
+                                sel.append(opt);
+                            }
+                            div.append(sel);
+                            $('#files').append(div);
+                            $('.selectcompanies').on('change', function(obj){
+                                $('#files').children().each(function(item, obj2){
+                                	obj2 = $(obj2);
+                                	if( obj2.prop('tagName') == 'IFRAME' || obj2.prop('tagName') == 'UL' ){
+                                		obj2.remove();
+                                	}
+                                });
+                                cid = parseInt(obj.target.options[obj.target.selectedIndex].value) < 1 ? 0 : obj.target.options[obj.target.selectedIndex].value;
+                                console.log("FUCKED CID", cid);
+                                let frame = '<iframe scrolling="yes" frameborder="0" src="' + host + '/filemanager/api/getTree/?getTree=1&cid=' + cid + '" width="0%" height="0%"></iframe>';
+                                $('#files').append(frame);
+                                //fetch(host + '/filemanager/router/?mode=gettree&cid=' + cid, {credentials: 'include'}).
+                                //then(rep => rep.json()).then(
+                                    //function(data){
+                                        //console.log(data);
+                                        //let div = $('<div></div>');
+                                        //for( let i=0; i < data.reply; i++ ){
+
+                                        //}
+                                    //}
+                                //);
+                            });
+                            console.log(div);
+                        }
+                    );
+                }
+
+
+                function fetchEmails(){
+                    fetch(host + '/messenger/api/getEmails/', {credentials: 'include'}).then(rep => rep.json()).then(
+                        function(d){
+                            if( d.status == 200 ){
+                                for( let item in d.message ){
+                                    currentemailid = currentemailid ? currentemailid : d.message[item]['id'];
+                                    h = '<div class="item " data-id="' + d.message[item]['id'] + '">\
+                                            <div class="inactive"><span class="icon">'
+                                            + d.message[item]['short_name'] + '</span><span class="caption">'
+                                            + d.message[item]['email'] + '</span></div>\
+                                            <div class="selected magictime"><span class="icon">'
+                                            + d.message[item]['short_name'] + '</span><span class="caption">'
+                                            + d.message[item]['email'] + '</span></div>\
+                                        </div>';
+                                    $('#top_menu').append(h);
+                                }
+                                getChats();
+                            }
+                        }
+                    );
+                }
+
+                fetchEmails();
+
+
+                function clearChats(){
+                    $(".addresses div").each(function(index, item){
+                        el = $(item);
+                        if( el.attr('data-id') > 0 ){
+                            item.parentNode.removeChild(item);
+                        }
+                    });
+                };
+
+
+                function getChats(cb){
+                    body = currentemailid ? JSON.stringify({'email_id': currentemailid}) : '{}';
+                    fetch(host + '/messenger/api/chatList/', {
+                        method: 'POST',
+                        credentials: 'include',
+                        body: body,
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    }).then(resp => resp.json()).then(
+                        function(d){
+                            if( d.status == 200 ){
+                                clearChats();
+                                for( let item in d.message ){
+                                    if( item == 0 ){
+                                        currentchatid = d.message[item]['id'];
+                                        currentemailid = d.message[item]['owner']['id'];
+                                        currentemail = d.message[item]['owner']['email'];
+                                        currentsubject = $.trim(d.message[item]['subject']);
+                                        //$('.theme .topic input').val(currentsubject);
+                                    }
+                                    h2 = '<div class="item" data-id="' + d.message[item]['id'] + '" emailid="'
+                                        + d.message[item]['owner']['id'] + '">\
+                                            <span class="icon"></span><span class="caption">'
+                                            + d.message[item]['title'] + '</span><span class="sub_icon"></span>\
+                                        </div>';
+                                    // <div class="subchats" id="subchats_' + d.message[item]['id'] + '"></div>
+                                    //console.log(h2);
+                                    $('.addresses').append(h2);
+                                    //for( let item2 in d.message[item]['childs'] ){
+                                    //    h2 = '<div class="item" data-id="' + d.message[item]['childs'][item2]['id'] + '" emailid="'
+                                    //        + d.message[item]['childs'][item2]['owner']['id'] + '">\
+                                    //            <span class="icon"></span><span class="caption">'
+                                    //            + d.message[item]['childs'][item2]['title'] + '</span><span class="sub_icon"></span>\
+                                    //        </div>';
+                                        //console.log(h2);
+                                    //    $('#subchats_' + d.message[item]['id']).append(h2);
+                                    //}
+                                }
+                            }
+                            if( !listenersActive ){
+                                setUpListeners();
+                                fetchChatMessages(currentchatid);
+                            }else if( cb ){
+                                cb();
+                            }else{
+                                setUpChatsListeners();
+                                fetchChatMessages(currentchatid);
+                            }
+                        }
+                    );
+                }
+
+
+                function sendChatMessage(chatid, emailid, message, subject){
+                    if( (!message && !filesForUpload) || !emailid || !subject ) return;
+                    //console.log(chatid, emailid);return;
+                    form = new FormData();
+                    form.append("chat", chatid);
+                    form.append("message", message);
+                    files = $('#filesinput')[0].files;
+                    form.append("subject", subject);
+                    for( let f=0; f < files.length; f++ ){
+                        form.append("files", files[f]);
+                    }
+                    if( filesForUpload ){
+                        for( let i = 0; i < filesForUpload.length; i++ ){
+                            form.append("files", filesForUpload[i].file, filesForUpload[i].name);
+                        }
+                    }
+                    //form.append("files[]", $('#filesinput')[0]);
+                    //body = emailid ? JSON.stringify({'chat': chatid, message: encodeURIComponent(message)}) : '{}';
+                    $('#filesinput').val('');
+                    filesForUpload = [];
+                    $('#attachedfiles').html('');
+                    fetch(host + '/messenger/api/send/' + emailid + '/', {
+                        method: 'POST',
+                        credentials: 'include',
+                        body: form,
+                        headers: {
+                            //'Content-Type': 'multipart/form-data'
+                        }
+                    }).then(resp => resp.json()).then(
+                        function(d){
+                            console.log(d);
+                            currentreplytext = '';
+                        }
+                    );
+                }
+
+
+                const getBlobURL = (code, type) => {
+                	console.log(type);
+                    const blob = new Blob([code], { type })
+                    return URL.createObjectURL(blob)
+                }
+
+
+                function fetchChatMessages(chatid, offset){
+                    if( !offset ) offset = 0;
+                    body = JSON.stringify({
+                        'chat': chatid,
+                        'offset': offset,
+                        'email': currentemailid
+                    });
+                    fetch(host + '/messenger/api/chatMessages/', {
+                        method: 'POST',
+                        credentials: 'include',
+                        body: body,
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    }).then(resp => resp.json()).then(
+                        function(d){
+                            if( d.status == 200 ){
+                                $('#messages').html('');
+                                if( d.message.length == 0 ){
+                                    $('#inputsubject').val('');
+                                    $('#inputsubject').focus();
+                                    return;
+                                }
+                                let borderdiv = '';
+                                let bd = false;
+                                let nms = '';
+                                for( let item=0; item < d.message.length; item++ ){
+                                    //order = d.message[item]['type'] == 'in' ? 'even' : 'odd';
+                                    order = d.message[item]['from_email'].indexOf(currentemail) == -1 ? 'even' : 'odd';
+                                    if( item + 1 >= d.message.length ){
+                                    	currentsubject = d.message[item].subject;
+                                    	setSubject();
+                                   	}
+                                    let dstatus = '';
+                                    if( d.message[item]['type'] == 'out' ){
+                                        //console.log("SENDED", d.message[item]['sended']);
+                                        dstatus = '<span class="circle ' +
+                                            (d.message[item]['sended'] == 1 ? 'statusok' : 'statusfail') + '">' +
+                                            (d.message[item]['sended'] == 1 ? '&#10004;' : '&#10006;') +
+                                            '</span>';
+                                        dstatus = '';
+                                    }
+                                    if( d.message[item]['message'].substr(0, 3) == "ï»¿" ){
+                                        d.message[item]['message'] = d.message[item]['message'].substr(3);
+                                    }
+                                    if( !bd && d.message[item + 1] && (
+                                    		d.message[item].subject.replace(/re:/i, '').trim() == d.message[item + 1].subject.replace(/re:/i, '').trim()
+                                    		|| d.message[item + 1].subject == '') ){
+                                    	borderdiv = '<div class="borderdiv">';
+                                    	bd = true;
+                                    }
+                                    //console.log(item);
+                                    //console.log(d.message[item + 1], borderdiv, d.message[item].subject.replace(/re:/i, '').trim(), d.message[item + 1].subject.replace(/re:/i, '').trim())
+                                    let nm = borderdiv + '<div class="message ' + order + '">\
+                                            <div class="content">\
+                                                <div class="header">' +
+                                                    dstatus +
+                                                    '<div class="topic">' + d.message[item]['subject'] + '</div>\
+                                                    <div class="time">' +
+                                                        d.message[item]['datetime'] +
+                                                    '</div>\
+                                                </div>\
+                                                <div class="body"><iframe onload="resizeIframe(this)" frameborder="0" scrolling="yes" style="overflow:hidden;height:100%;width:100%" height="100%" width="100%" height="100%" width="100%" src="' + getBlobURL(d.message[item]['message'], d.message[item]['content_type']) + '"></iframe></div>\
+                                                <div class="attach">';
+                                    //console.log("ATTACHMENTS", d.message[item]['attachments']);
+                                    borderdiv = '';
+                                    if( d.message[item]['attachments'] && d.message[item]['attachments'].length > 0 ){
+                                        for( let i=0; i < d.message[item]['attachments'].length; i++ ){
+                                            attach = d.message[item]['attachments'][i];
+                                            el = $('<i></i>');
+                                            el.attr('class', 'fas fa-file');
+                                            el.attr('url', attach['attachment']);
+                                            el.attr('title', attach['filename']);
+                                            el.attr('onclick', "clickFile(this)");
+                                            nm += el[0].outerHTML;
+                                            //console.log("EL", el, el[0].outerHTML);
+                                        }
+                                        //<i class="fas fa-file"></i>
+                                        //<i class="fas fa-file-word"></i>
+                                        //<i class="fas fa-file-excel"></i>
+                                        //<i class="fas fa-file-powerpoint"></i>
+                                        //<i class="fas fa-file-video"></i>
+                                        //<i class="fas fa-file-archive"></i>
+                                    }
+                                                //<div class="copies"><span class="caption">Copies:</span><span class="value">12345@ukr.net, in@l.ua, dfa@gmail.com</span></div>
+                                    nm += '</div>\
+                                            </div>\
+                                             <div class="controls">\
+                                                <div class="actions" msgid="' + d.message[item]['id'] + '" typemsg="' + d.message[item]['type'] + '">\
+                                                    <i class="fas fa-reply"></i>\
+                                                    <i class="fas fa-reply-all"></i>\
+                                                    <i class="fas fa-share-square"></i>\
+                                                    <i class="fas fa-trash-alt"></i>\
+                                                </div>\
+                                            </div>\
+                                        </div>';
+                                    console.log(item, borderdiv);
+                                    if( bd && !d.message[item + 1] ){
+                                    	nm += '</div>';
+                                    	bd = false;
+                                    	console.log(item, '1');
+                                    }else if( bd &&
+                                    		(d.message[item].subject.replace(/re:/i, '').trim() != d.message[item + 1].subject.replace(/re:/i, '').trim())
+                                    		&& d.message[item + 1].subject != '' ){
+                                    	nm += '</div>';
+                                    	console.log(item, '2');
+                                    	bd = false;
+                                    }else{
+                                    	nm += '<div class="clear">&nbsp;</div>';
+                                    }
+                                    console.log(nm);
+                                    nms += nm;
+                                    //$('#messages').append($(nm));
+                                }
+                                $('#messages').append($(nms))
+                                $('.actions .fa-reply').on('click', function(){
+                                    makeReply(this);
+                                });
+                                $('.actions .fa-reply-all').on('click', function(){
+                                    el = $(this);
+                                    console.log("reply all");
+                                });
+                                $('.actions .fa-share-square').on('click', function(){
+                                    el = $(this);
+                                    console.log("share");
+                                });
+                                $('.actions .fa-trash-alt').on('click', function(){
+                                    removeMessage(this);
+                                });
+                                $('#messages').animate({'scrollTop': $('#messages').prop('scrollHeight')});
+                            }
+                        }
+                    );
+                }
+
+
+                function makeReply(obj){
+                    obj = $(obj);
+                    msgid = obj.parent().attr('msgid');
+                    console.log(msgid);
+                    text = obj.parent().parent().parent().find('.content .body iframe').contents().find('html').html();
+                    currentreplytext = text;
+                    $('.editor .field').focus();
+                }
+
+
+                function removeMessage(obj){
+                    obj = $(obj);
+                    msgid = obj.parent().attr('msgid');
+                    type = obj.parent().attr('typemsg');
+
+                    fetch(host + '/messenger/api/delete/' + type + '/' + msgid + '/', {credentials: 'include'}).then(resp => resp.json()).then(
+                        function(d){
+                            console.log(d);
+                            if( d.status == 200 ){
+                                messel = obj.parent().parent().parent().parent();
+                                obj.parent().parent().parent().remove();
+                                if( messel.children().length == 0){
+                                    chatel = $("div[data-id='" + currentchatid + "']");
+                                    if( chatel.parent().children().length - 1 == 0 ){
+                                        chatel.parent().remove();
+                                    }else{
+                                        chatel.remove();
+                                    }
+                                }
+                            }
+                        }
+                    );
+                }
+
+
+                function createChat(emailid, emails){
+                    body = JSON.stringify({
+                        'owner': emailid,
+                        'emails': emails
+                    });
+                    fetch(host + '/messenger/api/createChat/', {
+                        method: 'POST',
+                        credentials: 'include',
+                        body: body,
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    }).then(resp => resp.json()).then(
+                        function(d){
+                            console.log(d);
+                            currentchatid = d.message.id;
+                            currentemailid = d.message.owner.id;
+                            fetchChatMessages(d.message.id, 0);
+                            //getChats(function(){
+                                //fetchChatMessages(d.message.id, 0);
+                            //});
+                        }
+                    );
+                }
+
+                function setChatToTop(obj){
+                    obj = $(obj.$trigger[0]);
+                    dataid = obj.attr('data-id');
+                    emailid = obj.attr('emailid');
+                    data = JSON.stringify({
+                        'chat': dataid,
+                        'email': emailid
+                    });
+
+                    fetch(host + '/messenger/api/setChatOnTop/', {
+                        method: 'POST',
+                        credentials: 'include',
+                        body: data,
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    }).then(resp => resp.json()).then(
+                        function(d){
+                            getChats();
+                            //parent = obj.parent();
+                            //obj.remove();
+                            //console.log(parent, parent.children()[0]);
+                            //$(parent.children()[0]).insertBefore(obj);
+                        }
+                    );
+                }
+
+                //createChat(11, 'hello', ['alen28@i.ua']);
+
+                function setUpChatsListeners(){
+                    /*$('.addresses .item').on('click', function(){
+                        $('.addresses .item').each(function(){
+                            $(this).find('.subchats').hide();
+                        });
+                        $(this).find('.subchats').show();
+                    });*/
+                    $('.addresses').contextMenu({
+                        selector: ".item",
+                        callback: function(key, options){
+                            if( options.$trigger[0].parentNode.className == "subchats" ) return;
+                            switch(key){
+                                case 'ontop':
+                                    setChatToTop(options);
+                                    break;
+
+                                case 'ignore':
+                                    console.log(key);
+                                    break;
+                            }
+                        },
+                        items: {
+                            'ontop': {'name': 'Закріпити вгорі'},
+                            'ignore': {'name': 'Перемістити в ігнор'}
+                        }
+                    });
+                    $('.addresses .item').on('click', function(){
+                        var id = $(this).attr('data-id');
+                        if( fetchInverval ){
+                            clearInterval(fetchInverval);
+                        }
+                        currentemailid = $(this).attr('emailid');
+                        currentsubject = $.trim($(this).text());
+                        //setSubject();
+
+
+                        $('#header-mails').html('');
+                        //console.log($(this).parent().parent());
+                        $('#header-mails').append($('<div class="title magictime">\
+                                    <span class="icon"></span><span class="caption">' + $(this).find('span')[1].innerText + '</span>\
+                                </div>'
+                        ));
+
+                        $('.addresses .item').each(function(){
+                            $(this).removeClass('active');
+                        });
+                        $('.addresses .item').each(function(){
+                            $(this).removeClass('active');
+                        });
+                        $(this).addClass('active');
+
+
+                        $('.messages .header .title').removeClass('boingInUp');
+                        setTimeout(function(){
+                            $('.messages .header .title').addClass('boingInUp');
+                            //$('.messages .header .title .icon').text(mc.addr[id-1].letter).css("backgroundColor", mc.addr[id-1].color);
+                            //$('.messages .header .title .caption').text(mc.addr[id-1].mail);
+                        }, 10);
+                        currentchatid = id;
+                        fetchChatMessages(id, 0);
+                        ////fetchInverval = setInterval(function(){
+                            //fetchChatMessages(id, 0);
+                        //}, 10000);
+                    });
+                }
+
+
+                function setSubject(){
+                    subj = $.trim(currentsubject);
+                    if( subj.substr(0, 3).toLowerCase() != 're:' ){
+                        subj = 'Re: ' + subj;
+                    }
+                    $('.theme .topic input').val(subj);
+                }
+
+
+                function setUpListeners(){
+                    $('#top_menu .item').each(function(){
+                        if(!$(this).is('.active')){
+                            $(this).find('.selected')
+                                .addClass('perspectiveDown');
+                        }
+                    });
+
+                    $('#email-submit').on('click', testEmail);
+
+                    $('#top_menu .item').on('click', function(){
+                        if($(this).is('.active')) return;
+                        if( $(this).attr("data-id") == -1 ) return;
+
+                        $(this).toggleClass('active');
+                        //console.log($(this).is('.item'), $(this).is('.active'));
+                        currentemailid = $(this).attr('data-id');
+                        currentemail = $($(this).find('div')[0]).find('span[class="caption"]').text();
+
+                        let that = this;
+                        $('#top_menu .item').each(function(){
+                            if(this != that) {
+                                $(this).removeClass('active');
+                                $(this).find('.selected')
+                                    .removeClass('perspectiveDownRetourn')
+                                    .addClass('perspectiveDown');
+
+                            }
+                        });
+
+                        if($(this).is('.active')){
+                            console.log('ACTIVE', this);
+                            $(this).find('.selected')
+                                .removeClass('perspectiveDown')
+                                .addClass('perspectiveDownRetourn');
+                        } else {
+                            console.log('INACTIVE', this)
+                            $(this).find('.selected')
+                                .removeClass('perspectiveDownRetourn')
+                                .addClass('perspectiveDown');
+                        }
+                        if( $(this).attr("data-id") > 0 ){
+                            getChats();
+                        }
+                    });
+
+                    // Side Menu
+
+                    setUpChatsListeners();
+
+                    // Editor
+
+                    $('.compose .send_button').on('click', function(){
+                        $(this).removeClass('puffIn');
+                        var that = this;
+                        setTimeout(function(){
+                            var text = $('.compose .editor .field').val();
+                            if( (!text && !filesForUpload) ) return;
+                            $('.compose .editor .field').val('');
+                            subject = $("#inputsubject").val();
+                            //$("#inputsubject").val('');
+                            if( currentreplytext ){
+                                text = text + '\n\n<br><br>' + currentreplytext;
+                                currentreplytext = '';
+                            }
+                            sendChatMessage(currentchatid, currentemailid, text, subject);
+                            //console.log("FUCK", new Error().stack);
+                            $(that).addClass('puffIn');
+                            //console.log(text);
+                            var m = $('.messages .message:last-child');
+                            var order = ($(m).is('.odd')? 'even': 'odd');
+
+                            var nm = $('<div class="message odd">\
+                                            <div class="content">\
+                                                <div class="header">\
+                                                    <div class="topic">' + subject + '</div>\
+                                                    <div class="time">' +
+                                                        $.format.date(new Date(), "dd/MM/yyyy hh:mm:ss") +
+                                                    '</div>\
+                                                </div>\
+                                                <div class="body">' + text + '</div>\
+                                                <div class="attach">\
+                                                    <i class="fas fa-file"></i>\
+                                                    <i class="fas fa-file-word"></i>\
+                                                    <i class="fas fa-file-excel"></i>\
+                                                    <i class="fas fa-file-powerpoint"></i>\
+                                                    <i class="fas fa-file-video"></i>\
+                                                    <i class="fas fa-file-archive"></i>\
+                                                </div>\
+                                            </div>\
+                                        </div>');
+                            //console.log(nm);
+                            //<div class="controls">' +
+                                                ////<div class="copies"><span class="caption">Copies:</span><span class="value">12345@ukr.net, in@l.ua, dfa@gmail.com</span></div>\
+                                                //'<div class="actions">\
+                                                    //<i class="fas fa-reply"></i>\
+                                                    //<i class="fas fa-reply-all"></i>\
+                                                    //<i class="fas fa-share-square"></i>\
+                                                    //<i class="fas fa-trash-alt"></i>\
+                                                //</div>\
+                                            //</div>\
+                            $('.right_column .messages').append(nm);
+                            $('.right_column .messages').scrollTop(jQuery('.right_column .messages')[0].scrollHeight);
+                        }, 10);
+                    });
+
+                    $('#selectfiles').on('click', function(){
+                        $('#filesinput').click();
+                    });
+
+                    $('#submitaddchat').on('click', function(){
+                        email = $('#inputaddchat').val();
+                        if( !email || !currentemailid ) return;
+                        createChat(currentemailid, [email]);
+                    });
+
+                    $('#fmfilesbdiv').on('click', function(){
+                        fetchUserFiles();
+                    });
+
+                    $('#filesinput').on("change", function(){
+                        files = $('#filesinput')[0].files;
+                        if( !files ) return;
+                        filesns = [];
+                        for( let i=0; i < files.length; i++ ){
+                            filesns.push(files[i].name);
+                        }
+                        $('#attachedfiles').text(filesns.join(', '));
+                    });
+
+                    listenersActive = true;
+                }
+
+			});
+		</script>
+	</body>
+
+</html>

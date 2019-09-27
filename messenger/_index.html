@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>MyBiz Пошта</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="{% static '/images/myBiz-logo.png' %}" type="image/png" />
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static '/style/style.css' %}" />
+    <link rel="stylesheet" type="text/css" media="screen and (min-width:240px)" href="{% static '/style//media/240-width.css' %}" /> <!-- Between 240px and 479px -->
+    <link rel="stylesheet" type="text/css" media="screen and (min-width:480px)" href="{% static '/style/media/480-width.css' %}" /> <!-- Between 480px and 720px -->
+    <link rel="stylesheet" type="text/css" media="screen and (min-width:1366px)" href="{% static '/style/media/1366-width.css' %}" /> <!-- For screens bigger than 1366px -->
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static '/style/style-additional.css' %}" />
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static '/style/messenger.css' %}" />
+
+
+</head>
+
+<body>
+
+<header class="filesystem-header-header">
+    <div class="filesystem-header-buttons">
+        <div class="filesystem-logo">
+            <a href="#"><img src="{% static '/images/myBiz-logo-horisont.png' %}"/></a>
+        </div>
+
+        <!--<div class="filesystem-header-buttons">-->
+        <div class="filesystem-header-buttons-container">
+            <a href="#" class="header-button files">
+                <div class="header-buttons">
+                    <img src="{% static '/images/icons/files.png' %}" alt="File icon" />
+                    <span class="inside-header-text">Файли та їх оборот</span>
+                </div>
+            </a>
+
+            <!-- <div class="notifications-block">
+                <div class="notifications-icon">
+                    <img src="{% static 'images/icons/yellow-folder.png' %}" alt="" class="notifications-image">
+                </div>
+
+                <a href="../filemanager/documents">
+                    <span class="notifications-title">Документообіг</span>
+                </a>
+            </div> -->
+
+            <a href="#" class="header-button mail">
+                <div class="header-buttons">
+                    <img src="{% static '/images/icons/main-mail.png' %}" alt="Mail icon">
+                    <span class="inside-header-text">Пошта</span>
+                </div>
+            </a>
+
+
+            <a href="../cabinet" class="header-button register">
+                <div class="header-buttons">
+                    <img src="{% static '/images/icons/register.png' %}" alt="Register icon">
+                    <span class="inside-header-text">Реєстрація та внесення змін</span>
+                </div>
+            </a>
+        </div>
+
+        <!--<div class="filesystem-search">-->
+        <!--<input type="text" placeholder="Пошук">-->
+        <!--<i class="fas fa-search fa-lg"></i>-->
+        <!--</div>-->
+        <div class="filesystem-profile">
+            <img class="user-image" src="{% static '/images/icons/user-image-icon.png' %}" />
+            <span class="profile-number">{{user.username}}</span>
+
+            <div class="profile-buttons">
+                <a href="../cabinet">
+                    <img class="settings-button" src="{% static '/images/icons/settings-icon.png' %}" />
+                </a>
+                <a href="../logout">
+                    <img class="on-off-button" src="{% static '/images/icons/onn-off-icon.png' %}" />
+                </a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="main">
+    <div class="tabs">
+        <ul class="nav nav-tabs">
+            <li class="nav-item nav-item--active">
+                <a class="nav-link-total active" href="#">Усі</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">bla-bla@ukr.net</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">lol@gmail.com</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">ТОВ "АКВАЛЮКС СИСТЕМ"</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link nav-link--last" href="#">ФОП ВАСЯ ПУПКІН</a>
+            </li>
+        </ul>
+    </div>
+    <div class="email">
+        <ul class="sheets">
+            <li class="sheet"><a href="#" class="sheet__link">Листи</a></li>
+            <li class="sheet sheet--active"><a href="#" class="sheet__link sheet__link--active">Повідомлення</a></li>
+        </ul>
+        <div class="workspace">
+            <input type="checkbox" id="checkbox_aside">
+            <div class="workspace-header">
+                <div class="workspace-header-left">
+                    <label for="checkbox_aside"  class="files-area">Файлы
+                        <span class="files-area__arrow"></span>
+                        <span class="files-area__folder"></span>
+                    </label>
+                    <button class="update"></button>
+                    <div class="adressee adressee--top">
+                        <span class="adressee__logo">B</span>
+                        bla-bla@ukr.net
+                    </div>
+                </div>
+                <input type="text" class="search">
+            </div>
+            <div class="workspace-main">
+                <div class="adressee-area">
+                    <form action="#" class="add-adressee-form">
+                        <input type="text">
+                        <button class="add-adressee-form__button"></button>
+                    </form>
+                    <ul class="adressee-list">
+                        <li class="adressee-item adressee-item--active">
+                            <div class="adressee">
+										<span class="adressee__logo">B
+											<span class="logo__indicator"></span>
+										</span>
+
+                                <div class="adressee__text-wrap">
+                                    <p class="adressee__name">bla-bla@ukr.net</p>
+                                    <p class="adressee__email"></p>
+                                </div>
+                                <span class="indicator"></span>
+                            </div>
+                        </li>
+                        <li class="adressee-item">
+                            <div class="adressee">
+										<span class="adressee__logo">B
+											<span class="logo__indicator">5</span>
+										</span>
+                                <div class="adressee__text-wrap">
+                                    <p class="adressee__name">ТОВ "Аквалюкс систем"</p>
+                                    <p class="adressee__email">office@ukr.net</p>
+                                </div>
+                                <span class="indicator">L</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="message_fileManager">
+                    <div class="listUsers">
+                        <input type="checkbox" id="checkbox_listUsers">
+                        <label class="UserLabel" for="checkbox_listUsers">Користувач<span class="files-area__arrow"></span></label>
+                        <ul>
+                            <li>
+                                <span class="listUsers-logo">B</span>
+                                <span class="listUsers-name">ТОВ "Аквалюкс систем"</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <ul class="directories">
+                        <li class="root-directory">Начальна директорія</li>
+                        <li class="drop-down">
+                            <ul class="deep-dirs">
+                                <li class="tree-li-before" style="color: rgb(0, 0, 0);"><input id="checkbox_tree0"
+                                                                                               type="checkbox">
+                                    <div style="white-space:nowrap"><label for="checkbox_tree0"></label><span
+                                            class="tree-dir"></span><span nodename="sdfsdfsdfs" nodetype="dir">sdfsdfsdfs</span>
+                                    </div>
+                                    <ul style="margin-left: 10%; margin-top: 4%; color: rgb(0, 0, 0);">
+                                        <li class="tree-li-before">
+                                            <nobr>
+                                                <mytag class="empty-space-tree">&nbsp;</mytag>
+                                                <img class="filesystem-navigator-left-xml" alt=""
+                                                     src="http://dev.mybiz.in.uastatic/images/icons/fb2-icon.png"><span
+                                                    style="margin-left:5%"
+                                                    nodename="sdfsdfsdfs/26550039861492J1301302100000000310320192655.xml"
+                                                    nodetype="file">26550039861492J1301302100000000310320192655.xml</span>
+                                            </nobr>
+                                        </li>
+                                        <li class="tree-li-before">
+                                            <nobr>
+                                                <mytag class="empty-space-tree">&nbsp;</mytag>
+                                                <img class="filesystem-navigator-left-png" alt=""
+                                                     src="http://dev.mybiz.in.uastatic/images/icons/png-icon.png"><span
+                                                    style="margin-left:5%" nodename="sdfsdfsdfs/search.png"
+                                                    nodetype="file">search.png</span></nobr>
+                                        </li>
+                                        <li class="tree-li-before">
+                                            <nobr>
+                                                <mytag class="empty-space-tree">&nbsp;</mytag>
+                                                <img class="filesystem-navigator-left-doc" alt=""
+                                                     src="http://dev.mybiz.in.uastatic/images/icons/doc-icon.png"><span
+                                                    style="margin-left:5%" nodename="sdfsdfsdfs/~$инансы.docx"
+                                                    nodetype="file">~$инансы.docx</span></nobr>
+                                        </li>
+                                        <li class="tree-li-before">
+                                            <nobr>
+                                                <mytag class="empty-space-tree">&nbsp;</mytag>
+                                                <img class="filesystem-navigator-left-undef" alt=""
+                                                     src="http://dev.mybiz.in.uastatic/images/icons/fu.png"><span
+                                                    style="margin-left:5%" nodename="sdfsdfsdfs/Без имени-2.psd"
+                                                    nodetype="file">Без имени-2.psd</span></nobr>
+                                        </li>
+                                        <li class="tree-li-before">
+                                            <nobr>
+                                                <mytag class="empty-space-tree">&nbsp;</mytag>
+                                                <img class="filesystem-navigator-left-jpeg" alt=""
+                                                     src="http://dev.mybiz.in.uastatic/images/icons/jpeg-icon.png"><span
+                                                    style="margin-left:5%" nodename="sdfsdfsdfs/диз єп.jpg"
+                                                    nodetype="file">диз єп.jpg</span></nobr>
+                                        </li>
+                                        <li class="tree-li-before">
+                                            <nobr>
+                                                <mytag class="empty-space-tree">&nbsp;</mytag>
+                                                <img class="filesystem-navigator-left-doc" alt=""
+                                                     src="http://dev.mybiz.in.uastatic/images/icons/doc-icon.png"><span
+                                                    style="margin-left:5%"
+                                                    nodename="sdfsdfsdfs/Документ Microsoft Office Word (2).docx"
+                                                    nodetype="file">Документ Microsoft Office Word (2).docx</span>
+                                            </nobr>
+                                        </li>
+                                        <li class="tree-li-before">
+                                            <nobr>
+                                                <mytag class="empty-space-tree">&nbsp;</mytag>
+                                                <img class="filesystem-navigator-left-jpeg" alt=""
+                                                     src="http://dev.mybiz.in.uastatic/images/icons/jpeg-icon.png"><span
+                                                    style="margin-left:5%" nodename="sdfsdfsdfs/Лединг.jpg"
+                                                    nodetype="file">Лединг.jpg</span></nobr>
+                                        </li>
+                                        <li class="tree-li-before">
+                                            <nobr>
+                                                <mytag class="empty-space-tree">&nbsp;</mytag>
+                                                <img class="filesystem-navigator-left-jpeg" alt=""
+                                                     src="http://dev.mybiz.in.uastatic/images/icons/jpeg-icon.png"><span
+                                                    style="margin-left:5%" nodename="sdfsdfsdfs/макет пошти.jpg"
+                                                    nodetype="file">макет пошти.jpg</span></nobr>
+                                        </li>
+                                        <li class="tree-li-before">
+                                            <nobr>
+                                                <mytag class="empty-space-tree">&nbsp;</mytag>
+                                                <img class="filesystem-navigator-left-doc" alt=""
+                                                     src="http://dev.mybiz.in.uastatic/images/icons/doc-icon.png"><span
+                                                    style="margin-left:5%" nodename="sdfsdfsdfs/Наказ №1.docx"
+                                                    nodetype="file">Наказ №1.docx</span></nobr>
+                                        </li>
+                                        <li class="tree-li-before">
+                                            <nobr>
+                                                <mytag class="empty-space-tree">&nbsp;</mytag>
+                                                <img class="filesystem-navigator-left-doc" alt=""
+                                                     src="http://dev.mybiz.in.uastatic/images/icons/doc-icon.png"><span
+                                                    style="margin-left:5%" nodename="sdfsdfsdfs/ст р2.docx"
+                                                    nodetype="file">ст р2.docx</span></nobr>
+                                        </li>
+                                        <li class="tree-li-before">
+                                            <nobr>
+                                                <mytag class="empty-space-tree">&nbsp;</mytag>
+                                                <img class="filesystem-navigator-left-doc" alt=""
+                                                     src="http://dev.mybiz.in.uastatic/images/icons/doc-icon.png"><span
+                                                    style="margin-left:5%" nodename="sdfsdfsdfs/финансы.docx"
+                                                    nodetype="file">финансы.docx</span></nobr>
+                                        </li>
+                                        <li class="tree-li-before">
+                                            <nobr>
+                                                <mytag class="empty-space-tree">&nbsp;</mytag>
+                                                <img class="filesystem-navigator-left-xls" alt=""
+                                                     src="http://dev.mybiz.in.uastatic/images/icons/xls-icon.png"><span
+                                                    style="margin-left:5%" nodename="sdfsdfsdfs/фінансова модель.xlsx"
+                                                    nodetype="file">фінансова модель.xlsx</span></nobr>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="tree-li-before" style="color: rgb(0, 0, 0);"><input id="checkbox_tree1"
+                                                                                               type="checkbox">
+                                    <div style="white-space:nowrap"><label for="checkbox_tree1"></label><span
+                                            class="tree-dir"></span><span nodename="test-folder" nodetype="dir">test-folder</span>
+                                    </div>
+                                    <ul style="margin-left: 10%; margin-top: 4%; color: rgb(0, 0, 0);">
+                                        <li class="tree-li-before"><input id="checkbox_tree2" type="checkbox">
+                                            <div style="white-space:nowrap"><label for="checkbox_tree2"></label><span
+                                                    class="tree-dir"></span><span nodename="test-folder/212"
+                                                                                  nodetype="dir">212</span></div>
+                                            <ul style="margin-left: 10%; margin-top: 4%;">
+                                                <li class="tree-li-before"><input id="checkbox_tree3" type="checkbox">
+                                                    <div style="white-space:nowrap"><label for="checkbox_tree3"></label><span
+                                                            class="tree-dir"></span><span
+                                                            nodename="test-folder/212/adasda"
+                                                            nodetype="dir">adasda</span></div>
+                                                    <ul style="margin-left: 10%; margin-top: 4%;">
+                                                        <li class="tree-li-before">
+                                                            <div style="white-space:nowrap">
+                                                                <mytag class="empty-space-tree" style="width: 3.5%">
+                                                                    &nbsp;
+                                                                </mytag>
+                                                                <span class="tree-dir"></span><span
+                                                                    nodename="test-folder/212/adasda/віві"
+                                                                    nodetype="dir">віві</span></div>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                <li class="tree-li-before">
+                                                    <nobr>
+                                                        <mytag class="empty-space-tree">&nbsp;</mytag>
+                                                        <img class="filesystem-navigator-left-xls" alt=""
+                                                             src="http://dev.mybiz.in.uastatic/images/icons/xls-icon.png"><span
+                                                            style="margin-left:5%"
+                                                            nodename="test-folder/212/реклама.xlsx" nodetype="file">реклама.xlsx</span>
+                                                    </nobr>
+                                                </li>
+                                                <li class="tree-li-before">
+                                                    <nobr>
+                                                        <mytag class="empty-space-tree">&nbsp;</mytag>
+                                                        <img class="filesystem-navigator-left-doc" alt=""
+                                                             src="http://dev.mybiz.in.uastatic/images/icons/doc-icon.png"><span
+                                                            style="margin-left:5%"
+                                                            nodename="test-folder/212/Статут №1.docx" nodetype="file">Статут №1.docx</span>
+                                                    </nobr>
+                                                </li>
+                                                <li class="tree-li-before">
+                                                    <nobr>
+                                                        <mytag class="empty-space-tree">&nbsp;</mytag>
+                                                        <img class="filesystem-navigator-left-file" alt=""
+                                                             src="http://dev.mybiz.in.uastatic/images/icons/file-icon.png"><span
+                                                            style="margin-left:5%" nodename="test-folder/212/тест.txt"
+                                                            nodetype="file">тест.txt</span></nobr>
+                                                </li>
+                                                <li class="tree-li-before">
+                                                    <nobr>
+                                                        <mytag class="empty-space-tree">&nbsp;</mytag>
+                                                        <img class="filesystem-navigator-left-xls" alt=""
+                                                             src="http://dev.mybiz.in.uastatic/images/icons/xls-icon.png"><span
+                                                            style="margin-left:5%"
+                                                            nodename="test-folder/212/№ 6 від 10 січня 2019 р.xls"
+                                                            nodetype="file">№ 6 від 10 січня 2019 р.xls</span></nobr>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="tree-li-before"><input id="checkbox_tree4" type="checkbox">
+                                            <div style="white-space:nowrap"><label for="checkbox_tree4"></label><span
+                                                    class="tree-dir"></span><span nodename="test-folder/911"
+                                                                                  nodetype="dir">911</span></div>
+                                            <ul style="margin-left: 10%; margin-top: 4%;">
+                                                <li class="tree-li-before">
+                                                    <nobr>
+                                                        <mytag class="empty-space-tree">&nbsp;</mytag>
+                                                        <img class="filesystem-navigator-left-xls" alt=""
+                                                             src="http://dev.mybiz.in.uastatic/images/icons/xls-icon.png"><span
+                                                            style="margin-left:5%"
+                                                            nodename="test-folder/911/01simple.xls" nodetype="file">01simple.xls</span>
+                                                    </nobr>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="tree-li-before">
+                                            <nobr>
+                                                <mytag class="empty-space-tree">&nbsp;</mytag>
+                                                <img class="filesystem-navigator-left-jpeg" alt=""
+                                                     src="http://dev.mybiz.in.uastatic/images/icons/jpeg-icon.png"><span
+                                                    style="margin-left:5%" nodename="test-folder/1.jpg" nodetype="file">1.jpg</span>
+                                            </nobr>
+                                        </li>
+                                        <li class="tree-li-before">
+                                            <nobr>
+                                                <mytag class="empty-space-tree">&nbsp;</mytag>
+                                                <img class="filesystem-navigator-left-file" alt=""
+                                                     src="http://dev.mybiz.in.uastatic/images/icons/file-icon.png"><span
+                                                    style="margin-left:5%" nodename="test-folder/1.txt" nodetype="file">1.txt</span>
+                                            </nobr>
+                                        </li>
+                                        <li class="tree-li-before">
+                                            <nobr>
+                                                <mytag class="empty-space-tree">&nbsp;</mytag>
+                                                <img class="filesystem-navigator-left-undef" alt=""
+                                                     src="http://dev.mybiz.in.uastatic/images/icons/fu.png"><span
+                                                    style="margin-left:5%"
+                                                    nodename="test-folder/26550039861492J0215520300000000120920182655.XML.p7s"
+                                                    nodetype="file">26550039861492J0215520300000000120920182655.XML.p7s</span>
+                                            </nobr>
+                                        </li>
+                                        <li class="tree-li-before">
+                                            <nobr>
+                                                <mytag class="empty-space-tree">&nbsp;</mytag>
+                                                <img class="filesystem-navigator-left-xml" alt=""
+                                                     src="http://dev.mybiz.in.uastatic/images/icons/fb2-icon.png"><span
+                                                    style="margin-left:5%"
+                                                    nodename="test-folder/26550039861492J1301302100000000310320192655.xml"
+                                                    nodetype="file">26550039861492J1301302100000000310320192655.xml</span>
+                                            </nobr>
+                                        </li>
+                                        <li class="tree-li-before">
+                                            <nobr>
+                                                <mytag class="empty-space-tree">&nbsp;</mytag>
+                                                <img class="filesystem-navigator-left-undef" alt=""
+                                                     src="http://dev.mybiz.in.uastatic/images/icons/fu.png"><span
+                                                    style="margin-left:5%" nodename="test-folder/erwrwerew"
+                                                    nodetype="file">erwrwerew</span></nobr>
+                                        </li>
+                                        <li class="tree-li-before">
+                                            <nobr>
+                                                <mytag class="empty-space-tree">&nbsp;</mytag>
+                                                <img class="filesystem-navigator-left-jpeg" alt=""
+                                                     src="http://dev.mybiz.in.uastatic/images/icons/jpeg-icon.png"><span
+                                                    style="margin-left:5%"
+                                                    nodename="test-folder/luke-mummert-1215365-unsplash.jpg"
+                                                    nodetype="file">luke-mummert-1215365-unsplash.jpg</span></nobr>
+                                        </li>
+                                        <li class="tree-li-before">
+                                            <nobr>
+                                                <mytag class="empty-space-tree">&nbsp;</mytag>
+                                                <img class="filesystem-navigator-left-rar" alt=""
+                                                     src="http://dev.mybiz.in.uastatic/images/icons/rar-icon.png"><span
+                                                    style="margin-left:5%"
+                                                    nodename="test-folder/subbotin-presentation-and-processing-knowledges-in-artificial-intelligence-systems.rar"
+                                                    nodetype="file">subbotin-presentation-and-processing-knowledges-in-artificial-intelligence-systems.rar</span>
+                                            </nobr>
+                                        </li>
+                                        <li class="tree-li-before">
+                                            <nobr>
+                                                <mytag class="empty-space-tree">&nbsp;</mytag>
+                                                <img class="filesystem-navigator-left-jpeg" alt=""
+                                                     src="http://dev.mybiz.in.uastatic/images/icons/jpeg-icon.png"><span
+                                                    style="margin-left:5%"
+                                                    nodename="test-folder/vanveenjf-1216164-unsplash.jpg"
+                                                    nodetype="file">vanveenjf-1216164-unsplash.jpg</span></nobr>
+                                        </li>
+                                        <li class="tree-li-before">
+                                            <nobr>
+                                                <mytag class="empty-space-tree">&nbsp;</mytag>
+                                                <img class="filesystem-navigator-left-file" alt=""
+                                                     src="http://dev.mybiz.in.uastatic/images/icons/file-icon.png"><span
+                                                    style="margin-left:5%" nodename="test-folder/zxczxcxz.txt"
+                                                    nodetype="file">zxczxcxz.txt</span></nobr>
+                                        </li>
+                                        <li class="tree-li-before">
+                                            <nobr>
+                                                <mytag class="empty-space-tree">&nbsp;</mytag>
+                                                <img class="filesystem-navigator-left-xls" alt=""
+                                                     src="http://dev.mybiz.in.uastatic/images/icons/xls-icon.png"><span
+                                                    style="margin-left:5%" nodename="test-folder/Анкета-Программст.xlsx"
+                                                    nodetype="file">Анкета-Программст.xlsx</span></nobr>
+                                        </li>
+                                        <li class="tree-li-before">
+                                            <nobr>
+                                                <mytag class="empty-space-tree">&nbsp;</mytag>
+                                                <img class="filesystem-navigator-left-file" alt=""
+                                                     src="http://dev.mybiz.in.uastatic/images/icons/file-icon.png"><span
+                                                    style="margin-left:5%"
+                                                    nodename="test-folder/відповіді на питання.txt" nodetype="file">відповіді на питання.txt</span>
+                                            </nobr>
+                                        </li>
+                                        <li class="tree-li-before">
+                                            <nobr>
+                                                <mytag class="empty-space-tree">&nbsp;</mytag>
+                                                <img class="filesystem-navigator-left-xls" alt=""
+                                                     src="http://dev.mybiz.in.uastatic/images/icons/xls-icon.png"><span
+                                                    style="margin-left:5%"
+                                                    nodename="test-folder/Дон маре звіт за 01 19.xlsx" nodetype="file">Дон маре звіт за 01 19.xlsx</span>
+                                            </nobr>
+                                        </li>
+                                        <li class="tree-li-before">
+                                            <nobr>
+                                                <mytag class="empty-space-tree">&nbsp;</mytag>
+                                                <img class="filesystem-navigator-left-png" alt=""
+                                                     src="http://dev.mybiz.in.uastatic/images/icons/png-icon.png"><span
+                                                    style="margin-left:5%"
+                                                    nodename="test-folder/Зняток екрану з 2018-07-21 21-11-01.png"
+                                                    nodetype="file">Зняток екрану з 2018-07-21 21-11-01.png</span>
+                                            </nobr>
+                                        </li>
+                                        <li class="tree-li-before">
+                                            <nobr>
+                                                <mytag class="empty-space-tree">&nbsp;</mytag>
+                                                <img class="filesystem-navigator-left-doc" alt=""
+                                                     src="http://dev.mybiz.in.uastatic/images/icons/doc-icon.png"><span
+                                                    style="margin-left:5%" nodename="test-folder/Протокол ok.docx"
+                                                    nodetype="file">Протокол ok.docx</span></nobr>
+                                        </li>
+                                        <li class="tree-li-before">
+                                            <nobr>
+                                                <mytag class="empty-space-tree">&nbsp;</mytag>
+                                                <img class="filesystem-navigator-left-pdf" alt=""
+                                                     src="http://dev.mybiz.in.uastatic/images/icons/pdf-icon.png"><span
+                                                    style="margin-left:5%"
+                                                    nodename="test-folder/Підписаний_Договір_поруки_і_доп.угода_до_нього_КУБ.pdf"
+                                                    nodetype="file">Підписаний_Договір_поруки_і_доп.угода_до_нього_КУБ.pdf</span>
+                                            </nobr>
+                                        </li>
+                                        <li class="tree-li-before">
+                                            <nobr>
+                                                <mytag class="empty-space-tree">&nbsp;</mytag>
+                                                <img class="filesystem-navigator-left-pdf" alt=""
+                                                     src="http://dev.mybiz.in.uastatic/images/icons/pdf-icon.png"><span
+                                                    style="margin-left:5%" nodename="test-folder/ТОВ.pdf"
+                                                    nodetype="file">ТОВ.pdf</span></nobr>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="tree-li-before" style="color: rgb(0, 0, 0);">
+                                    <div style="white-space:nowrap">
+                                        <mytag class="empty-space-tree" style="width: 3.5%">&nbsp;</mytag>
+                                        <span class="tree-dir"></span><span
+                                            nodename="zxzxzxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+                                            nodetype="dir">zxzxzxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</span>
+                                    </div>
+                                </li>
+                                <li class="tree-li-before" style="color: rgb(0, 0, 0);"><input id="checkbox_tree5"
+                                                                                               type="checkbox">
+                                    <div style="white-space:nowrap"><label for="checkbox_tree5"></label><span
+                                            class="tree-dir"></span><span nodename="цйц" nodetype="dir">цйц</span></div>
+                                    <ul style="margin-left: 10%; margin-top: 4%; color: rgb(0, 0, 0);">
+                                        <li class="tree-li-before"><input id="checkbox_tree6" type="checkbox">
+                                            <div style="white-space:nowrap"><label for="checkbox_tree6"></label><span
+                                                    class="tree-dir"></span><span nodename="цйц/1test" nodetype="dir">1test</span>
+                                            </div>
+                                            <ul style="margin-left: 10%; margin-top: 4%;">
+                                                <li class="tree-li-before">
+                                                    <nobr>
+                                                        <mytag class="empty-space-tree">&nbsp;</mytag>
+                                                        <img class="filesystem-navigator-left-doc" alt=""
+                                                             src="http://dev.mybiz.in.uastatic/images/icons/doc-icon.png"><span
+                                                            style="margin-left:5%"
+                                                            nodename="цйц/1test/Статут №1 ok.docx" nodetype="file">Статут №1 ok.docx</span>
+                                                    </nobr>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="tree-li-before"><input id="checkbox_tree7" type="checkbox">
+                                            <div style="white-space:nowrap"><label for="checkbox_tree7"></label><span
+                                                    class="tree-dir"></span><span nodename="цйц/цйц"
+                                                                                  nodetype="dir">цйц</span></div>
+                                            <ul style="margin-left: 10%; margin-top: 4%;">
+                                                <li class="tree-li-before">
+                                                    <nobr>
+                                                        <mytag class="empty-space-tree">&nbsp;</mytag>
+                                                        <img class="filesystem-navigator-left-zip" alt=""
+                                                             src="http://dev.mybiz.in.uastatic/images/icons/zip-icon.png"><span
+                                                            style="margin-left:5%" nodename="цйц/цйц/documents.zip"
+                                                            nodetype="file">documents.zip</span></nobr>
+                                                </li>
+                                                <li class="tree-li-before">
+                                                    <nobr>
+                                                        <mytag class="empty-space-tree">&nbsp;</mytag>
+                                                        <img class="filesystem-navigator-left-rar" alt=""
+                                                             src="http://dev.mybiz.in.uastatic/images/icons/rar-icon.png"><span
+                                                            style="margin-left:5%"
+                                                            nodename="цйц/цйц/subbotin-presentation-and-processing-knowledges-in-artificial-intelligence-systems.rar"
+                                                            nodetype="file">subbotin-presentation-and-processing-knowledges-in-artificial-intelligence-systems.rar</span>
+                                                    </nobr>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="tree-li-before">
+                                            <nobr>
+                                                <mytag class="empty-space-tree">&nbsp;</mytag>
+                                                <img class="filesystem-navigator-left-undef" alt=""
+                                                     src="http://dev.mybiz.in.uastatic/images/icons/fu.png"><span
+                                                    style="margin-left:5%" nodename="цйц/111111111111111"
+                                                    nodetype="file">111111111111111</span></nobr>
+                                        </li>
+                                        <li class="tree-li-before">
+                                            <div style="white-space:nowrap">
+                                                <mytag class="empty-space-tree" style="width: 3.5%">&nbsp;</mytag>
+                                                <span class="tree-dir"></span><span nodename="цйц/dsadasadasd"
+                                                                                    nodetype="dir">dsadasadasd</span>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="tree-li-before" style="color: rgb(0, 0, 0);">
+                                    <nobr>
+                                        <mytag class="empty-space-tree">&nbsp;</mytag>
+                                        <img class="filesystem-navigator-left-xml" alt=""
+                                             src="http://dev.mybiz.in.uastatic/images/icons/fb2-icon.png"><span
+                                            style="margin-left:5%"
+                                            nodename="26550039861492J1201010100000004011120182655.xml" nodetype="file">26550039861492J1201010100000004011120182655.xml</span>
+                                    </nobr>
+                                </li>
+                                <li class="tree-li-before" style="color: rgb(0, 0, 0);">
+                                    <nobr>
+                                        <mytag class="empty-space-tree">&nbsp;</mytag>
+                                        <img class="filesystem-navigator-left-undef" alt=""
+                                             src="http://dev.mybiz.in.uastatic/images/icons/fu.png"><span
+                                            style="margin-left:5%"
+                                            nodename="26550039861492J1301302100000000310320192655.xml.p7s"
+                                            nodetype="file">26550039861492J1301302100000000310320192655.xml.p7s</span>
+                                    </nobr>
+                                </li>
+                                <li class="tree-li-before" style="color: rgb(0, 0, 0);">
+                                    <nobr>
+                                        <mytag class="empty-space-tree">&nbsp;</mytag>
+                                        <img class="filesystem-navigator-left-xml" alt=""
+                                             src="http://dev.mybiz.in.uastatic/images/icons/fb2-icon.png"><span
+                                            style="margin-left:5%"
+                                            nodename="26550039861492J1301402100000001610520192655.xml" nodetype="file">26550039861492J1301402100000001610520192655.xml</span>
+                                    </nobr>
+                                </li>
+                                <li class="tree-li-before" style="color: rgb(0, 0, 0);">
+                                    <nobr>
+                                        <mytag class="empty-space-tree">&nbsp;</mytag>
+                                        <img class="filesystem-navigator-left-jpeg" alt=""
+                                             src="http://dev.mybiz.in.uastatic/images/icons/jpeg-icon.png"><span
+                                            style="margin-left:5%"
+                                            nodename="44257036_2247951598613001_3311088892345581568_n.jpg"
+                                            nodetype="file">44257036_2247951598613001_3311088892345581568_n.jpg</span>
+                                    </nobr>
+                                </li>
+                                <li class="tree-li-before" style="color: rgb(0, 0, 0);">
+                                    <nobr>
+                                        <mytag class="empty-space-tree">&nbsp;</mytag>
+                                        <img class="filesystem-navigator-left-undef" alt=""
+                                             src="http://dev.mybiz.in.uastatic/images/icons/fu.png"><span
+                                            style="margin-left:5%" nodename="hdjd" nodetype="file">hdjd</span></nobr>
+                                </li>
+                                <li class="tree-li-before" style="color: rgb(0, 0, 0);">
+                                    <nobr>
+                                        <mytag class="empty-space-tree">&nbsp;</mytag>
+                                        <img class="filesystem-navigator-left-file" alt=""
+                                             src="http://dev.mybiz.in.uastatic/images/icons/file-icon.png"><span
+                                            style="margin-left:5%" nodename="reeww.txt" nodetype="file">reeww.txt</span>
+                                    </nobr>
+                                </li>
+                                <li class="tree-li-before" style="color: rgb(0, 0, 0);">
+                                    <nobr>
+                                        <mytag class="empty-space-tree">&nbsp;</mytag>
+                                        <img class="filesystem-navigator-left-png" alt=""
+                                             src="http://dev.mybiz.in.uastatic/images/icons/png-icon.png"><span
+                                            style="margin-left:5%" nodename="search.png"
+                                            nodetype="file">search.png</span></nobr>
+                                </li>
+                                <li class="tree-li-before" style="color: rgb(0, 0, 0);">
+                                    <nobr>
+                                        <mytag class="empty-space-tree">&nbsp;</mytag>
+                                        <img class="filesystem-navigator-left-xls" alt=""
+                                             src="http://dev.mybiz.in.uastatic/images/icons/xls-icon.png"><span
+                                            style="margin-left:5%" nodename="Анкета-Программст.xlsx" nodetype="file">Анкета-Программст.xlsx</span>
+                                    </nobr>
+                                </li>
+                                <li class="tree-li-before" style="color: rgb(0, 0, 0);">
+                                    <nobr>
+                                        <mytag class="empty-space-tree">&nbsp;</mytag>
+                                        <img class="filesystem-navigator-left-doc" alt=""
+                                             src="http://dev.mybiz.in.uastatic/images/icons/doc-icon.png"><span
+                                            style="margin-left:5%" nodename="документообіг.1549630189.docx"
+                                            nodetype="file">документообіг.1549630189.docx</span></nobr>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                </div>
+                <div class="correspondence">
+                    <div class="dialog">
+                        <div class="letter-group">
+                            <div class="letter letter--input">
+                                <div class="letter__body">
+                                    <div class="letter__header">
+                                        <h5 class="letter__title">Кіт Шредінгера</h5>
+                                        <time class="letter__date">16:45 15.05.2019</time>
+                                    </div>
+                                    <p class="letter__text">Quisque id mi. Nullam nulla eros, ultricies sit amet,
+                                        nonummy
+                                        id, imperdiet feugiat, pede. Nam adipiscing. Praesent egestas neque eu enim. Sed
+                                        hendrerit.
+
+                                        Ut non enim eleifend felis pretium feugiat. Pellentesque commodo eros a enim.
+                                        Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac
+                                        turpis
+                                        egestas. Nulla neque dolor, sagittis eget, iaculis quis, molestie non, velit.
+                                        Nunc
+                                        nonummy metus.</p>
+                                    <div class="letter__insert">
+                                        <img src="{% static '/images/icons/pdf-icon.png'%}" height="20" width="20"/>
+                                        <img src="{% static '/images/icons/jpeg-icon.png'%}" height="20" width="20"/>
+                                    </div>
+                                </div>
+                                <div class="letter__function-block">
+                                    <p class="letter__adressee">Copia:<span class="letter__adressee__copy"></span>
+                                        weerrtttt</p>
+                                    <div class="letter__buttons">
+                                        <button class="button__reply"></button>
+                                        <button class="button__reply-all"></button>
+                                        <button class="button__forward"></button>
+                                        <button class="button__delete"></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="letter letter--input letter-out">
+                                <div class="letter__body">
+                                    <div class="letter__header">
+                                        <h5 class="letter__title">Кіт Шредінгера</h5>
+                                        <time class="letter__date">16:45 15.05.2019</time>
+                                    </div>
+                                    <p class="letter__text">Quisque id mi. Nullam nulla eros, ultricies sit amet,
+                                        nonummy
+                                        id, imperdiet feugiat, pede. Nam adipiscing. Praesent egestas neque eu enim. Sed
+                                        hendrerit.
+
+                                        Ut non enim eleifend felis pretium feugiat. Pellentesque commodo eros a enim.
+                                        Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac
+                                        turpis
+                                        egestas. Nulla neque dolor, sagittis eget, iaculis quis, molestie non, velit.
+                                        Nunc
+                                        nonummy metus.</p>
+                                    <div class="letter__insert">
+                                        <img src="{% static '/images/icons/pdf-icon.png'}" height="20" width="20"/>
+                                    </div>
+                                </div>
+                                <div class="letter__function-block">
+                                    <p class="letter__adressee">Copia:<span class="letter__adressee__copy"></span>
+                                        weerrtttt</p>
+                                    <div class="letter__buttons">
+                                        <!--<button class="button__reply"></button>
+                                        <button class="button__reply-all"></button>-->
+                                        <button class="button__forward"></button>
+                                        <button class="button__delete"></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="letter letter--input">
+                                <div class="letter__body">
+                                    <div class="letter__header">
+                                        <h5 class="letter__title">Кіт Шредінгера</h5>
+                                        <time class="letter__date">16:45 15.05.2019</time>
+                                    </div>
+                                    <p class="letter__text">Quisque id mi. Nullam nulla eros, ultricies sit amet,
+                                        nonummy
+                                        id, imperdiet feugiat, pede. Nam adipiscing. Praesent egestas neque eu enim. Sed
+                                        hendrerit.
+
+                                        Ut non enim eleifend felis pretium feugiat. Pellentesque commodo eros a enim.
+                                        Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac
+                                        turpis
+                                        egestas. Nulla neque dolor, sagittis eget, iaculis quis, molestie non, velit.
+                                        Nunc
+                                        nonummy metus.</p>
+                                    <div class="letter__insert">
+                                        <img src="{% static '/images/icons/pdf-icon.png'%}" height="20" width="20"/>
+                                        <img src="{% static '/images/icons/jpeg-icon.png'%}" height="20" width="20"/>
+                                    </div>
+                                </div>
+                                <div class="letter__function-block">
+                                    <p class="letter__adressee">Copia:<span class="letter__adressee__copy"></span>
+                                        weerrtttt</p>
+                                    <div class="letter__buttons">
+                                        <button class="button__reply"></button>
+                                        <button class="button__reply-all"></button>
+                                        <button class="button__forward"></button>
+                                        <button class="button__delete"></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="letter letter--input">
+                            <div class="letter__body">
+                                <div class="letter__header">
+                                    <h5 class="letter__title">Кіт Шредінгера</h5>
+                                    <time class="letter__date">16:45 15.05.2019</time>
+                                </div>
+                                <p class="letter__text">Quisque id mi. Nullam nulla eros, ultricies sit amet,
+                                    nonummy
+                                    id, imperdiet feugiat, pede. Nam adipiscing. Praesent egestas neque eu enim. Sed
+                                    hendrerit.
+
+                                    Ut non enim eleifend felis pretium feugiat. Pellentesque commodo eros a enim.
+                                    Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac
+                                    turpis
+                                    egestas. Nulla neque dolor, sagittis eget, iaculis quis, molestie non, velit.
+                                    Nunc
+                                    nonummy metus.</p>
+                                <div class="letter__insert">
+                                    <img src="{% static '/images/icons/pdf-icon.png'%}" height="20" width="20"/>
+                                    <img src="{% static '/images/icons/jpeg-icon.png'%}" height="20" width="20"/>
+                                </div>
+                            </div>
+                            <div class="letter__function-block">
+                                <p class="letter__adressee">Copia:<span class="letter__adressee__copy"></span>
+                                    weerrtttt</p>
+                                <div class="letter__buttons">
+                                    <button class="button__reply"></button>
+                                    <button class="button__reply-all"></button>
+                                    <button class="button__forward"></button>
+                                    <button class="button__delete"></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="letter letter--input letter-out">
+                            <div class="letter__body">
+                                <div class="letter__header">
+                                    <h5 class="letter__title">Кіт Шредінгера</h5>
+                                    <time class="letter__date">16:45 15.05.2019</time>
+                                </div>
+                                <p class="letter__text">Quisque id mi. Nullam nulla eros, ultricies sit amet,
+                                    nonummy
+                                    id, imperdiet feugiat, pede. Nam adipiscing. Praesent egestas neque eu enim. Sed
+                                    hendrerit.
+
+                                    Ut non enim eleifend felis pretium feugiat. Pellentesque commodo eros a enim.
+                                    Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac
+                                    turpis
+                                    egestas. Nulla neque dolor, sagittis eget, iaculis quis, molestie non, velit.
+                                    Nunc
+                                    nonummy metus.</p>
+                                <div class="letter__insert">
+                                    <img src="{% static '/images/icons/pdf-icon.png'%}" height="20" width="20"/>
+                                </div>
+                            </div>
+                            <div class="letter__function-block">
+                                <p class="letter__adressee">Copia:<span class="letter__adressee__copy"></span>
+                                    weerrtttt</p>
+                                <div class="letter__buttons">
+                                    <!--<button class="button__reply"></button>
+                                    <button class="button__reply-all"></button>-->
+                                    <button class="button__forward"></button>
+                                    <button class="button__delete"></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <form class="form_message">
+                        <div class="message__input">
+                            <input class="message__input-header" placeholder="Тема">
+                            <textarea class="message__input-body" placeholder="Повiдомлення"></textarea>
+                        </div>
+                        <div class="FormButtonPanel">
+                            <div class="attach__buttons">
+                                <button class="attach__file"></button>
+                                <button class="attach__audio"></button>
+                                <button class="attach__video"></button>
+                                <button class="attach__photo"></button>
+                                <button class="attach__image"></button>
+                                <button class="attach__text"></button>
+                                <button class="attach__table"></button>
+                            </div>
+                            <button class="button__send-message"></button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="filesystem-footer">
+    <nav class="filesystem-footer-links">
+        <a>Форум</a>
+        <a>Про нас</a>
+        <a>Зворотній зв'язок</a>
+        <a>Для інвесторів</a>
+        <a>Краудфандинг</a>
+    </nav>
+
+    <div class="social-links">
+        <div class="soc-link linkedin">
+            <i class="fab fa-linkedin fa-lg"></i>
+        </div>
+
+        <div class="soc-link telegram">
+            <i class="fab fa-telegram-plane fa-lg"></i>
+        </div>
+
+        <div class="soc-link twitter">
+            <i class="fab fa-twitter fa-lg"></i>
+        </div>
+
+        <div class="soc-link instagram">
+            <i class="fab fa-instagram fa-lg"></i>
+        </div>
+
+        <div class="soc-link facebook">
+            <i class="fab fa-facebook fa-lg"></i>
+        </div>
+
+        <div class="soc-link google-plus">
+            <i class="fab fa-google-plus-g fa-lg"></i>
+        </div>
+
+        <div class="soc-link youtube">
+            <i class="fab fa-youtube fa-lg"></i>
+        </div>
+    </div>
+</footer>
+<script src="{% static '/src/messenger/moment.js' %}"></script>
+<script src="{% static '/src/messenger/jquery-3.4.1.min.js' %}"></script>
+<script src="{% static '/src/messenger/messenger.js' %}"></script>
+</body>
+
+</html>

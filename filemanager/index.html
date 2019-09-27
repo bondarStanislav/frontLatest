@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+    {% load static %}
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>MyBiz Filemanager</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="{% static '/images/myBiz-logo.png' %}" type="image/png" />
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,300|Open+Sans:300,400|Roboto+Condensed|Roboto:100&display=swap" rel="stylesheet">
+     
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static '/style/reset.css' %}" />
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static '/style/style.css' %}" />
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static '/style/modal_windows.css' %}" />
+    <link rel="stylesheet" type="text/css" media="screen and (min-width:240px)" href="{% static '/style//media/240-width.css' %}" /> <!-- Between 240px and 479px -->
+    <link rel="stylesheet" type="text/css" media="screen and (min-width:480px)" href="{% static '/style/media/480-width.css' %}" /> <!-- Between 480px and 720px -->
+    <link rel="stylesheet" type="text/css" media="screen and (min-width:1366px)" href="{% static '/style/media/1366-width.css' %}" /> <!-- For screens bigger than 1366px -->
+    <!--файл МедіаЗапитівПеренесенийДо_media_переіменований_300-700_700-1200 link rel="stylesheet" type="text/css" media="screen" href="{% static '/style/style-additional.css' %}" /-->
+
+    <!-- Styles and scripts for testing  -->
+    <!-- Test styles -->
+     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mocha/5.2.0/mocha.css"> -->
+    
+    <!-- Mocha script --> 
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/5.2.0/mocha.js"></script>-->
+
+    <!-- Setting for BDD -->
+
+    <!-- Adding chai script -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/4.2.0/chai.js"></script>
+
+    <!-- Adding function assert in global scope -->
+    <script>
+        const assert = chai.assert;
+        const expect = chai.expect;
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+
+    <!-- jQuery Modal -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script> -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" /> -->
+</head>
+
+<body>
+<!--<div class="filemanager-body">-->
+    <header class="filesystem-header-header">
+        <div class="filesystem-header-buttons">
+        <div class="filesystem-logo">
+            <a href="#"><img src="{% static '/images/myBiz-logo-horisont.png' %}"/></a>
+        </div>
+            <div class="filesystem-header-right">
+            <div class="filesystem-icons">
+                    <!-- <img src="{% static '/images/icons/mail-icons.png' %}"> -->
+                    <a href="/filemanager/">
+                        <img src="{% static '/images/icons/info-icon.png' %}">
+                    </a>
+                    <a href="/messenger/">
+                        <img src="{% static '/images/icons/mail-icon.png' %}">
+                    </a>
+            </div>
+            <div class="filesystem-profile">
+            <!--<img class="user-image" src="{% static '/images/icons/user-image-icon.png' %}" />-->
+                {% if user.avatar %}
+                    <img src="{{ user.avatar.url }}" alt="" class="cabinet-image">
+                {% else %}
+                    <img src="{% static '/images/default-user.png' %}" alt="" class="cabinet-image">
+                {% endif %}
+            <span class="profile-number">{{user.username}}</span>
+
+            <div class="profile-buttons">
+                <a href="../cabinet">
+                    <img class="settings-button" src="{% static '/images/icons/settings-icon.png' %}" />
+                </a>
+                 <a href="../logout">
+                    <img class="on-off-button" src="{% static '/images/icons/onn-off-icon.png' %}" />
+                </a>
+            </div>
+        </div>
+        </div>
+        </div>
+
+
+        
+        <div class="filesystem-tabs">
+            <div class="tab active user-tab">
+                {% if user.avatar %}
+                    <img src="{{ user.avatar.url }}" alt="" class="cabinet-image">
+                {% else %}
+                    <img src="{% static '/images/default-user.png' %}" alt="" class="cabinet-image">
+                {% endif %}
+                <span>{{user.username}}</span>
+            </div>
+        </div>
+            <div class="container-buttons">
+                <div class="container-button home-button">
+                    <img src="{% static '/images/icons/filemanager-panel/home.png' %}" title="Додому"  alt="Home button">
+                </div>
+
+                <div class="container-button grids">
+                    <img src="{% static '/images/icons/filemanager-panel/grid-1.png' %}" title="Вигляд значки" alt="Grid button">
+                    <img src="{% static '/images/icons/filemanager-panel/grid-2.png' %}" title="Вигляд іконки" alt="Grid button">
+                </div>
+
+                <div class="container-button file-control">
+                    <img src="{% static '/images/icons/filemanager-panel/directory-plus.png' %}" title="Створити папку" class="make-dir-button" alt="Directory plus button">
+                    <img src="{% static '/images/icons/filemanager-panel/download.png' %}" title="Завантажими з сервера" class="download-button" alt="Download button">
+                    <img src="{% static '/images/icons/filemanager-panel/upload.png' %}" title="Завантажити файл на сервер" class="upload-button" alt="Upload button">
+                </div>
+
+                <div class="container-button copy-etc">
+                    <img src="{% static '/images/icons/filemanager-panel/copy.png' %}" title="Копіювати файл" class="copy-button" alt="Copy button">
+                    <img src="{% static '/images/icons/filemanager-panel/cut.png' %}" title="Вирізати файл" class="move-button" alt="Cut button">
+                    <img src="{% static '/images/icons/filemanager-panel/paste.png' %}" title="Вставити файл" class="paste-button" alt="Paste button">
+                    <img src="{% static '/images/icons/filemanager-panel/trash.png' %}" title="Видалити файл" class="remove-button" alt="Trash button">
+                </div>
+
+                <div class="container-button filter" style="display: none">
+                    <img src="{% static '/images/icons/filemanager-panel/filter.png' %}" alt="Filter button" id="filter-set" title="Фільтрувати">
+                    <img src="{% static '/images/icons/filemanager-panel/cancel-filter.png' %}" alt="Cancel filter button" id="filter-cancel" title="Фільтр назад">
+                    <img src="{% static '/images/icons/filemanager-panel/undo-filter.png' %}" alt="Undo filter button" id="filter-undo" title="Відмінити фільтрування">
+
+                </div> 
+                <div class="container-button sort">
+                    <button class="open-sort"><img src="{% static '/images/icons/filemanager-panel/sort-nodename.png' %}" alt="sort by name" id="sort-nodename" class="sort-btn"></button>
+                    <div class="sort-dropdown">                                    
+                            <img src="{% static '/images/icons/filemanager-panel/sort-nodename.png' %}" alt="sort by name" id="sort-nodename" class="sort-btn">
+                        <img src="{% static '/images/icons/filemanager-panel/sort-za.png' %}" alt="sort by name reverse" id="sort-za" class="sort-btn">
+                        <img src="{% static '/images/icons/filemanager-panel/sort-date.png' %}" alt="sort by date" id="sort-date" class="sort-btn">
+                        <img src="{% static '/images/icons/filemanager-panel/sort-dateRe.png' %}" alt="sort by date reverse" id="sort-dateRe" class="sort-btn">
+                        <img src="{% static '/images/icons/filemanager-panel/sort-size.png' %}" alt="sort by size" id="sort-size" class="sort-btn">
+                        <img src="{% static '/images/icons/filemanager-panel/sort-sizeRe.png' %}" alt="sort by size reverse" id="sort-sizeRe" class="sort-btn">
+                        <img src="{% static '/images/icons/filemanager-panel/sort-mime-type.png' %}" alt="sort by type" id="sort-mime-type" class="sort-btn">
+                        <img src="{% static '/images/icons/filemanager-panel/sort-typeRe.png' %}" alt="sort by type reverse" id="sort-typeRe" class="sort-btn">
+                    </div>
+                </div>
+
+                <div class="container-button navigator-search">
+                    <img src="{% static '/images/icons/filemanager-panel/write.png' %}" alt="Sign button" title="Підписати" class="sign-button">
+                    <img src="{% static '/images/icons/filemanager-panel/search.png' %}" alt="Verify button" title="Перевірити підпис" class="verify-sign-button">
+                </div>
+
+                <div id="buttonsForDocuments" class="container-button tables" style="display:none">
+                    <img src="{% static '/images/icons/filemanager-panel/table-1.png' %}" alt="Table button">
+                    <img src="{% static '/images/icons/filemanager-panel/table-2.png' %}" alt="Table button">
+                </div>
+
+                <div class="container-button mail-user">
+                    <img src="{% static '/images/icons/filemanager-panel/user +.png' %}" class="share-file" alt="User + button" title="Надати доступ">
+                    <img src="{% static '/images/icons/filemanager-panel/mail.png' %}" class="share-email-button" alt="Mail button" title="Відправити по пошті">
+                </div>
+
+                <div class="container-button settings">
+                    <!--<img src="{% static '/images/icons/settings.png' %}" alt="Settings button">-->
+                    <img src="{% static '/images/icons/filemanager-panel/support.png' %}" alt="Support button" class="support-icon">
+                </div>
+            </div>
+
+            <div class="container-path">
+                <div class="path-arrows">
+                    <img src="{% static '/images/icons/arrow-left.png' %}" class="go-back-button" alt="">
+                    <img src="{% static '/images/icons/arrow-right.png' %}" alt="" class="go-forward-button">
+                    <img src="{% static '/images/icons/caret-down.png' %}" alt="" class="select-from-list-button">
+                    <img src="{% static '/images/icons/arrow-up.png' %}" alt="" class="folder-up-button">
+                </div>
+
+                <input class="path-input" type="text">
+                <img src="{% static '/images/icons/refresh.png' %}" class="path-input-refresh">
+
+                <input class="path-search" type="text">
+                <i class="fas fa-search fa-lg path-search-icon"></i>
+            </div>
+
+    </header>
+
+    <section class="filesystem-section">
+
+
+            <div class="container-navigator">
+                <div class="navigator-aside">
+                    <!-- <div class="aside-avatar">
+                        {% if user.avatar %}
+                        <img src="{{ user.avatar.url }}" alt="" class="cabinet-image">
+                        {% else %}
+                        <img src="{% static 'http://localhost/mybiz-front-master/static/images/default-user.png' %}" alt="" class="cabinet-image">
+                        {% endif %}
+                        <span class="profile-number">{{user.username}}</span>
+                    </div> -->
+                    <div class="aside-directories">
+                    <ul class="directories">
+                        <li class="root-directory">Начальна директорія</li>
+                        <li class="drop-down">
+                            <ul class="deep-dirs">
+                            </ul>
+                        </li>
+                    </ul>
+                    </div>
+                </div>
+
+                <div class="navigator-main">
+                    <div class="filename columns">
+                        <div class="columns-name column-name-1">
+                            <b>Ім'я файла</b>
+                        </div>
+                        <ul></ul>
+                    </div>
+
+                    <div class="creating-date columns">
+                        <div class="columns-name column-name-2">
+                            <b>Дата</b>
+                        </div>
+                        <ul></ul>
+                    </div>
+
+                    <div class="filetype columns">
+                        <div class="columns-name column-name-3">
+                            <b>Тип</b>
+                        </div>
+                        <ul></ul>
+                    </div>
+
+                    <div class="size columns">
+                        <div class="columns-name column-name-4">
+                            <b>Розмір</b>
+                        </div>
+                        <ul></ul>
+                    </div>
+                    <div class="user columns">
+                        <div class="columns-name column-name-4">
+                            <b>Надано доступ</b>
+                        </div>
+                        <ul></ul>
+                    </div>
+                </div>
+            </div>
+
+
+        
+    </section>
+
+    <footer class="filesystem-footer">
+        <nav class="filesystem-footer-links">
+            <a>Форум</a>
+            <a>Про нас</a>
+            <a>Зворотній зв'язок</a>
+            <a>Для інвесторів</a>
+            <a>Краудфандинг</a>
+        </nav>
+
+        <div class="social-links">
+            <div class="soc-link linkedin">
+                <i class="fab fa-linkedin fa-lg"></i>
+            </div>
+
+            <div class="soc-link telegram">
+                <i class="fab fa-telegram-plane fa-lg"></i>
+            </div>
+
+            <div class="soc-link twitter">
+                <i class="fab fa-twitter fa-lg"></i>
+            </div>
+
+            <div class="soc-link instagram">
+                <i class="fab fa-instagram fa-lg"></i>
+            </div>
+
+            <div class="soc-link facebook">
+                <i class="fab fa-facebook fa-lg"></i>
+            </div>
+
+            <div class="soc-link google-plus">
+                <i class="fab fa-google-plus-g fa-lg"></i>
+            </div>
+
+            <div class="soc-link youtube">
+                <i class="fab fa-youtube fa-lg"></i>
+            </div>
+        </div>
+    </footer>
+<!--</div>-->
+
+    <!--<div id="mocha">-->
+        <!--<h3 class="go-back-from-test" style="cursor: pointer;">Go back to body</h3>-->
+    <!--</div>-->
+    <script>var initialized = false;</script>
+    <script src="{% static '/js/signer.js' %}"></script>
+    <script src="{% static '/js/sign/jszip.js' %}"></script>
+    <script src="{% static '/js/sign/test.js' %}"></script>    
+    <script src="{% static '/src/filemanager/filemanager-API.js' %}"></script>
+    <script src="{% static '/src/filemanager/filemanager-GUI.js' %}"></script>
+    <script src="{% static '/src/elements/notifications.js' %}"></script>  
+    <script src="{% static '/src/filemanager/documents.js' %}"></script>
+    <script src="{% static '/src/filemanager/office-administration.js' %}"></script>   
+    <!--<script src="{% static '/src/test/fm-test.js' %}"></script>  -->
+    <!--<script>mocha.run()</script>-->
+
+
+
+</body>
+</html>

@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html>
+    {% load static %}
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>MyBiz | Особистий кабінет</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="{% static '/images/myBiz-logo.png' %}" type="image/png" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+    crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+    crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static '/style/style.css' %}" />
+    <link rel="stylesheet" type="text/css" media="screen and (min-width:240px)" href="{% static '/style//media/240-width.css' %}" /> <!-- Between 240px and 479px -->
+    <link rel="stylesheet" type="text/css" media="screen and (min-width:480px)" href="{% static '/style/media/480-width.css' %}" /> <!-- Between 480px and 720px -->
+    <link rel="stylesheet" type="text/css" media="screen and (min-width:1366px)" href="{% static '/style/media/1366-width.css' %}" /> <!-- For screens bigger than 1366px -->
+    <style>
+.filesystem-header-header {
+display: flex;
+flex-direction: column;
+justify-content: flex-start;
+padding: 0 0;
+height: 70px;
+background-color: lightgrey;
+border-radius: 0em;
+cursor: pointer; 
+}
+
+.profile-number {
+font-family: Arial, sans-serif;
+padding: 0 10px;
+font-size: 16px;
+} 
+.filesystem-header-header img {
+margin: 0;
+padding: 0;
+border: 0;
+font-size: 100%;
+font: inherit;
+vertical-align: baseline;
+}
+.filesystem-logo a img {
+  margin-left: 15px;
+  margin-top: 5px;
+  height: 80%;
+  width: auto;
+  border-radius: 1em;
+  background-color: #fff;
+}
+    </style>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+</head>
+
+<body>
+    <!-- <header class="filesystem-header">
+        <div class="filesystem-logo">
+            <a href="#"><img src="{% static '/images/myBiz-logo-horisont.png' %}"/></a>
+        </div>
+
+        <nav class="filesystem-header-buttons">
+                <a href="/filemanager/" class="header-button files">
+                    <div class="header-buttons">
+                        <img src="{% static '/images/icons/files.png' %}" alt="File icon" />
+                        <span class="inside-header-text">Файли та їх оборот</span>
+                    </div>
+                </a>
+
+                <div class="notifications-block">
+                    <div class="notifications-icon">
+                        <img src="{% static 'images/icons/yellow-folder.png' %}" alt="" class="notifications-image">
+                    </div>
+                    
+                    <a href="../filemanager/documents">
+                        <span class="notifications-title">Документообіг</span>
+                    </a>
+                </div> -->
+
+                <!-- <a href="/messenger/" class="header-button mail">
+                    <div class="header-buttons">
+                        <img src="{% static '/images/icons/main-mail.png' %}" alt="Mail icon">
+                        <span class="inside-header-text">Пошта</span>
+                    </div>
+                </a>
+
+
+                <a href="#" class="header-button register">
+                    <div class="header-buttons">
+                        <img src="{% static '/images/icons/register.png' %}" alt="Register icon">
+                        <span class="inside-header-text">Реєстрація та внесення змін</span>
+                    </div>
+                </a>
+
+                <div class="filesystem-search">
+                    <input type="text" placeholder="Пошук">
+                    <i class="fas fa-search fa-lg"></i>
+                </div>
+        </nav>
+
+        <div class="filesystem-profile"> -->
+            <!--<img class="user-image" src="{% static '/images/icons/user-image-icon.png' %}" />-->
+            <!-- {% if user.avatar %}
+                <img src="{{ user.avatar.url }}" alt="" class="cabinet-image">
+            {% else %}
+                <img src="{% static '/images/default-user.png" alt="" class="cabinet-image' %}">
+            {% endif %} -->
+            
+            <!-- <span class="profile-number">{{user.username}}</span>
+
+            <div class="profile-buttons">
+                <a href="#">
+                    <img class="settings-button" src="{% static '/images/icons/settings-icon.png' %}" />
+                </a>
+
+                <a href="../logout">
+                    <img class="on-off-button" src="{% static '/images/icons/onn-off-icon.png' %}" />
+                </a>
+            </div>
+        </div>
+    </header> --> 
+    <header class="filesystem-header-header">
+            <div class="filesystem-header-buttons">
+            <div class="filesystem-logo">
+                <a href="#"><img src="{% static '/images/myBiz-logo-horisont.png' %}"/></a>
+            </div>
+                <div class="filesystem-header-right">
+                <div class="filesystem-icons">
+                        <!-- <img src="{% static '/images/icons/mail-icons.png' %}"> -->
+                        <a href="/filemanager/">
+                            <img src="{% static '/images/icons/info-icon.png' %}">
+                        </a>
+                        <a href="/messenger/">
+                            <img src="{% static '/images/icons/mail-icon.png' %}">
+                        </a>
+                </div>
+                <div class="filesystem-profile">
+                <!--<img class="user-image" src="{% static '/images/icons/user-image-icon.png' %}" />-->
+                    {% if user.avatar %}
+                        <img src="{{ user.avatar.url }}" alt="" class="cabinet-image">
+                    {% else %}
+                        <img src="{% static '/static/images/default-user.png' %}" alt="" class="cabinet-image">
+                    {% endif %}
+                <span class="profile-number">{{user.username}}</span>
+    
+                <div class="profile-buttons">
+                    <a href="../cabinet">
+                        <img class="settings-button" src="{% static '/images/icons/settings-icon.png' %}" />
+                    </a>
+                     <a href="../logout">
+                        <img class="on-off-button" src="{% static '/images/icons/onn-off-icon.png' %}" />
+                    </a>
+                </div>
+            </div>
+            </div>
+            </div>
+    </header>
+    
+    <aside class="cabinet-aside">
+        <div class="aside-buttons personal-data">
+            Загальні налаштування
+        </div>
+
+        <div class="aside-buttons gov-register">
+            Особисті дані
+        </div>
+
+        <div class="aside-buttons business-objects">
+            Бізнес-об’єкти
+        </div>
+
+        <div class="aside-buttons mail-settings">
+            Налаштування пошти
+        </div>
+    </aside>
+
+    <section class="cabinet-section">
+
+        <div class="section-data">
+            <h2>Загальні налаштування</h2>
+
+            <form class="data-form" action="/cabinet/" enctype="multipart/form-data" method="POST">
+                <div>
+                    <label for="last-name">Прізвище</label>
+                    <input type="text" class="data-form-inputs" id="last-name" name="last_name" value="{{user.last_name}}">
+                    <font id="err_last_name" color="red">{{ formerr.last_name }}</font>
+                </div>
+
+                <div>
+                    <label for="first-name">Ім’я</label>
+                    <input type="text" class="data-form-inputs" id="first-name" name="first_name" value="{{user.first_name}}">
+                    <font id="err_first_name" color="red">{{ formerr.first_name }}</font>
+                </div>
+
+                <div>
+                    <label for="middle-name">По батькові</label>
+                    <input type="text" class="data-form-inputs" id="middle-name" name="middle_name" value="{{user.middle_name}}">
+                    <font id="err_middle_name" color="red">{{ formerr.middle_name }}</font>
+                </div>
+
+                <div>
+                    <label for="else-mail">Стороння поштова скринька</label>
+                    <input type="text" class="data-form-inputs" id="else-mail" name="email" value="{{user.email}}">
+                    <font id="err_email" color="red">{{ formerr.email }}</font>
+                </div>
+
+                <div>
+                    <label for="phone-number">Номер телефону</label>
+                    <input type="text" class="data-form-inputs" id="phone-number" name="phone" value="{{user.phone}}">
+                    <font id="err_phone" color="red">{{ formerr.phone }}</font>
+                </div>
+
+                <div class="cabinet-image-pick pickers">
+                    <div class="cabinet-image-container">
+                        {% if user.avatar %}
+                            <img src="{{ user.avatar.url }}" alt="" class="cabinet-image">
+                        {% else %}
+                            <img src="{%static '/images/default-user.png' %}" alt="" class="cabinet-image">
+                        {% endif %}
+                    </div>
+
+                    <div>
+                        <label for="cabinet-image">Завантажити фото</label>
+                        <input type="file" class="data-form-inputs" id="cabinet-image" value="{{user.avatar}}" name="avatar">
+                    </div>
+                    <font id="err_avatar" color="red">{{ formerr.avatar }}</font>
+                </div>
+
+                <div class="change-password">
+                    <h3>Зміна паролю</h3>
+                    <div>
+                    <div>
+                        <label for="old-password">Старий пароль</label>
+                        <input type="password" class="data-form-inputs" id="old-password" name="password_old">
+                    </div>
+
+                    <div>
+                        <label for="new-password">Новий пароль</label>
+                        <input type="password" class="data-form-inputs" id="new-password" name="password">
+                    </div>
+
+                    <div>
+                        <label for="confirm-password">Повторіть пароль</label>
+                        <input type="password" class="data-form-inputs" id="confirm-password" name="password_confirm">
+                    </div>
+                </div>
+            </div>
+
+                <button type="submit" class="data-form-send">Зберегти зміни</button>
+            </form>
+        </div>
+
+        <div class="section-register">
+            <h2>Особисті данні</h2>
+
+            <form class="form-register" method="POST" action="/cabinet/user/settings/editPersonlaInfo/" enctype="multipart/form-data">
+                <div>                
+                    <label for="birthday">Дата народження</label>
+                    <input type="date" class="form-register-inputs" id="birthday" name="date_birthday" value="{{user.date_birthday|date:'Y-m-d'}}">
+                    <br><font id="err_date_birthday" color="red">{{ formerr.date_birthday }}</font>
+                </div>
+
+                <div>                
+                    <label for="birthday-place">Місце народження</label>
+                    <input type="text" class="form-register-inputs" id="birthday-place" name="place_birthday" value="{{user.place_birthday}}">
+                    <br><font id="err_place_birthday" color="red">{{ formerr.place_birthday }}</font>
+                </div>
+
+                <div class="ipn-block">
+                    <label for="ipn-code">Ідентифікаційний код</label>
+                    <input type="text" class="form-register-inputs" id="ipn-code" name="ipn" value="{{user.ipn}}">
+                    <br><font id="err_ipn" color="red">{{ formerr.ipn }}</font>
+
+                    <label for="upload-code">Завантажити копію</label>
+                    <input type="file" class="form-register-inputs" id="upload-code" name="ipn_scan" value="{{user.ipn_scan}}">
+                    {% if user.ipn_scan %}
+                        <br><img src="{{ user.ipn_scan.url }}" width="100" height="150">
+                    {% endif %}
+                </div>
+
+                <div class="pass-block">
+                    <label for="pass-data">Паспортні дані (серія/номер або номер)</label>
+                    <input type="text" class="form-register-inputs" id="pass-data" name="passport" value="{{user.passport}}">
+                    <br><font id="err_passport" color="red">{{ formerr.passport }}</font>
+
+                    <label for="upload-pass">Завантажити копію</label>
+                    <input type="file" class="form-register-inputs" id="upload-pass" name="passport_scan" value="{{user.passport_scan}}">
+                    {% if user.passport_scan %}
+                        <br><img src="{{ user.passport_scan.url }}" width="100" height="150">
+                    {% endif %}
+                </div>
+
+                <div>
+                    <label for="citizenship">Громадянство</label>
+                    <input type="text" class="form-register-inputs" id="citizenship" name="citizenship" value="{{user.citizenship}}">
+                    <br><font id="err_citizenship" color="red">{{ formerr.citizenship }}</font>
+                </div>
+
+                <div>
+                    <label for="register-places">Адреса реєстрації</label>
+                    <input type="text" class="form-register-inputs" id="register-places" name="address" value="{{user.address}}">
+                    <br><font id="err_address" color="red">{{ formerr.address }}</font>
+                </div>
+
+                <div>
+                    <label for="fact-places">Адреса фактичного проживання</label>
+                    <input type="text" class="form-register-inputs" id="fact-places" name="address2" value="{{user.address2}}">
+                    <br><font id="err_address2" color="red">{{ formerr.address2 }}</font>
+                </div>
+
+                <div>
+                    <label for="marital">Сімейний стан</label>
+                    <input type="text" id="marital" name="family_status" value="{{user.family_status}}">
+                    <br><font id="err_family_status" color="red">{{ formerr.family_status }}</font>
+                </div>
+
+                <div class="family-block">
+                    <label for="relatives">Родичі (чоловік/дружина, батьки, діти та ін. ...: ПІБ + дата народження)</label>
+                    <div style="display:block;margin-left:1.5%">
+                        {% for ff in user.family_info %}
+                            <div class="family-inputs">
+                                <input type="text" name="family[]" class="form-register-family-inputs" value="{{ ff.fio }}">
+                                <input type="date" name="family_date[]" class="form-register-family-date" value="{{ ff.date_birthday|date:'Y-m-d' }}">
+                            </div><br>
+                        {% endfor %}
+                        <div class="family-inputs">
+                            <input type="text" id="relatives" name="family[]" class="form-register-family-inputs">
+                            <input type="date" name="family_date[]" class="form-register-family-date">
+                        </div>
+
+                        <div class="family-buttons">
+                            <img src="{% static '/images/icons/plus.png' %}" class="plus-button"/>
+                            <img src="{% static '/images/icons/minus.png' %}" class="minus-button"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="conviction">Судимість</label>
+                    <select name="conviction" class="form-register-inputs" id="conviction">
+                        <option {% if user.conviction == '1' %} selected {% endif %} value="1">Немає судимості</option>
+                        <option {% if user.conviction == '2' %} selected {% endif %} value="2">Є судимість</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="form-register-send">Зберегти зміни</button>
+                
+            </form>
+        </div>
+
+        <div class="section-objects">
+            <h2>Бізнес-об’єкти</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <td>Ім'я компанії</td>
+                        <td>ЄДРПОУ</td>
+                        <td>Доступ</td>
+                        
+                    </tr>
+                </thead>
+
+                <tbody id="business-objects-table" class="business-objects-table">
+
+
+                </tbody>
+            </table>
+
+            <button id="btn-add-bussines-object" type="button" class="add-new-object" data-toggle="modal" data-target="#exampleModal">Додати новий обʼєкт</button>
+        </div>
+
+        <div class="section-settings">
+            <h2>Налаштування пошти</h2>
+            <div></div>
+        </div>
+    </section>
+
+    <footer class="filesystem-footer">
+        <nav class="filesystem-footer-links">
+            <a>Форум</a>
+            <a>Про нас</a>
+            <a>Зворотній звʼязок</a>
+            <a>Для інвесторів</a>
+            <a>Краудфандинг</a>
+        </nav>
+
+        <div class="social-links">
+            <div class="soc-link linkedin">
+                <i class="fab fa-linkedin fa-lg"></i>
+            </div>
+
+            <div class="soc-link telegram">
+                <i class="fab fa-telegram-plane fa-lg"></i>
+            </div>
+
+            <div class="soc-link twitter">
+                <i class="fab fa-twitter fa-lg"></i>
+            </div>
+
+            <div class="soc-link instagram">
+                <i class="fab fa-instagram fa-lg"></i>
+            </div>
+
+            <div class="soc-link facebook">
+                <i class="fab fa-facebook fa-lg"></i>
+            </div>
+
+            <div class="soc-link google-plus">
+                <i class="fab fa-google-plus-g fa-lg"></i>
+            </div>
+
+            <div class="soc-link youtube">
+                <i class="fab fa-youtube fa-lg"></i>
+            </div>
+        </div>
+    </footer>
+
+     <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div role="document">
+        <div class="modal-content">
+            <iframe src="/cabinet/createOrEditCompany/" style="width:100%;height:100%"></iframe>
+<!--            <div id="request">-->
+          <div class="modal-header">
+            <!-- <h5 class="modal-title" id="exampleModalLabel">Введіть ЄДРПОУ</h5> -->
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+      </div>
+      <div class="text-center d-none" id="spinner">
+        <div class="spinner-border text-primary" role="status">
+          <span class="sr-only"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--End Modal -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+    crossorigin="anonymous"></script>
+    <script src="{% static '/src/cabinet/cabinet-modal.js' %}"></script>
+    <script src="{% static '/src/cabinet/cabinet.js' %}"></script>
+    <script src="{% static '/src/cabinet/photo-preview.js' %}"></script>
+    <script src="{% static '/src/cabinet/request-cabinet.js' %}"></script>
+    <script src="{% static '/src/elements/notifications.js' %}"></script>
+    
+</body>
+
+</html>

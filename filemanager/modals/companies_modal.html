@@ -1,0 +1,49 @@
+<input type="hidden" id="targetCid">
+
+
+<table width="100%" style="font-size: 1.3em">
+        <tr>
+            <td align="center">назва</td>
+            <td align="center">ЄДРПОУ</td>
+        </tr>
+        <tr>
+            <td align="center">
+                <input type="text" style="width:90%" class="search" maxlength="20" id="searchName" onkeypress="myBizManagerGUI.__searchCompany();">
+            </td>
+            <td align="center">
+                <input type="text" style="width:90%" class="search" maxlength="10" id="searchEdrpou" onkeypress="myBizManagerGUI.__searchCompany();">
+            </td>
+        </tr>
+</table>
+
+<div style="max-height:140px;overflow:scroll">
+    <table  width="100%" id="companyList" style="font-size: 1.3em;table-layout:fixed">
+        {% for row in clist %}
+            <tr style="cursor:pointer" onclick="myBizManagerGUI.markUnmark(this);document.getElementById('targetCid').value = '{{ row.id }}';document.getElementById('displayContrAgent').innerHTML = '{{ row.name }}'">
+                <td align="center">{{ row.name }}</td>
+                <td align="center">{{ row.edrpou }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+
+<h5>Додати контрагента</h5><br>
+<div class="block-input-modal-send-to-company">
+    <label style="font-size: 1.5em" for="structureName">Структура</label>
+        <input style="margin-left: 8.5%" id="structureName" type="text"><br>
+</div>
+
+<div class="block-input-modal-send-to-company">
+    <label style="font-size: 1.5em" for="companyName">Імʼя компанії</label>
+        <input style="margin-left: 5%" id="companyName" type="text"><br>
+</div>
+
+<div class="block-input-modal-send-to-company">
+    <label style="font-size: 1.5em" for="edrpou">ЄДРПОУ</label>
+        <input style="margin-left: 14%" id="edrpou" type="text"><br>
+</div>
+
+<div class="block-input-modal-send-to-company">
+    <label style="font-size: 1.5em" for="emailOrPhone">E-mail або телефон</label>
+        <input style="max-width:53%;margin-left: 5%" id="emailOrPhone" type="text"><br>
+</div>

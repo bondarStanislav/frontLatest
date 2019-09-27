@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+    {% load static %}
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>MyBiz | Реєстрація</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="{% static 'images/myBiz-logo.png' %}" type="image/png" />
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+        crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" media="screen" href="{% static 'style/style.css' %}" />
+        <link rel="stylesheet" type="text/css" media="screen and (min-width:240px)" href="{% static 'style//media/240-width.css' %}" /> <!-- Between 240px and 479px -->
+        <link rel="stylesheet" type="text/css" media="screen and (min-width:480px)" href="{% static 'style/media/480-width.css' %}" /> <!-- Between 480px and 720px -->
+        <link rel="stylesheet" type="text/css" media="screen and (min-width:1366px)" href="../style/media/1366-width.css" /> <!-- For screens bigger than 1366px -->
+</head>
+
+<body>
+    <header class="register-header">
+        <div class="filesystem-logo">
+            <a href="../.."><img src="{% static 'images/myBiz-logo-horisont.png' %}"/></a>
+        </div>
+    </header>
+
+    <section class="register-section">
+        <h1 class="register-main-heading">Реєстрація нового користувача</h1>
+        <form>
+            <div class="register-main-inputs">
+                <div class="register-input-number">
+                    <label for="register-number">Номер телефона або E-mail</label>
+                    <input type="tel" id="register-number" name="login" value="{{ username }}" required>
+                </div>
+            </div>
+
+            <div class="register-comment">
+                <span>Ваш телефон буде використовуватися тільки для створення пошти</span>
+            </div>
+
+            <div class="register-password-create">
+                <div class="password">
+                    <label for="password-first">Ваш пароль:</label>
+                    <input type="password" id="password-first" name="password" required>
+                </div>
+            </div>
+
+            <div class="register-captcha-block">
+                <div class="g-recaptcha" data-sitekey="6Lf0iEIUAAAAAJNkXKXSKfpIiYU2f3dHLGMYf_is"></div>
+            </div>
+
+            <div class="register-comment">
+                <span>Створюючи обліковий запис, ви підтверджуєте що ознайомились і погоджуєтесь з <a href="http://dev.mybiz.in.ua/rules/"> правилами </a> сервісу <b>MyBiz</b></span>
+            </div>
+
+            <div class="register-buttons">
+                <button type="submit">Зареєструватися</button>
+                <!-- <button type="cancel">Скасувати реєстрацію</button> -->
+            </div>
+
+            {% if hash_string %}
+                <input type="hidden" name="hash_string" value="{{ hash_string }}">
+            {% endif %}
+        </form>
+
+    </section>
+
+    <footer class="filesystem-footer">
+        <nav class="filesystem-footer-links">
+            <a>Форум</a>
+            <a>Про нас</a>
+            <a>Зворотній звʼязок</a>
+            <a>Для інвесторів</a>
+            <a>Краудфандинг</a>
+        </nav>
+
+        <div class="social-links">
+            <div class="soc-link linkedin">
+                <i class="fab fa-linkedin fa-lg"></i>
+            </div>
+
+            <div class="soc-link telegram">
+                <i class="fab fa-telegram-plane fa-lg"></i>
+            </div>
+
+            <div class="soc-link twitter">
+                <i class="fab fa-twitter fa-lg"></i>
+            </div>
+
+            <div class="soc-link instagram">
+                <i class="fab fa-instagram fa-lg"></i>
+            </div>
+
+            <div class="soc-link facebook">
+                <i class="fab fa-facebook fa-lg"></i>
+            </div>
+
+            <div class="soc-link google-plus">
+                <i class="fab fa-google-plus-g fa-lg"></i>
+            </div>
+
+            <div class="soc-link youtube">
+                <i class="fab fa-youtube fa-lg"></i>
+            </div>
+        </div>
+    </footer>
+
+    <script src='https://www.google.com/recaptcha/api.js?hl-uk' async defer></script>    
+    
+    <script src="{% static 'src/register/request-register.js'%}"></script>
+</body>
+
+</html>

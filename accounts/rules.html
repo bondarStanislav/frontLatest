@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>MyBiz | Реєстрація</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="{% static 'images/myBiz-logo.png' %}" type="image/png" />
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+        crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'style/style.css' %}" />
+    <link rel="stylesheet" type="text/css" media="screen and (min-width:240px)" href="{% static 'style//media/240-width.css' %}" />
+    <!-- Between 240px and 479px -->
+    <link rel="stylesheet" type="text/css" media="screen and (min-width:480px)" href="{% static 'style/media/480-width.css' %}" />
+    <!-- Between 480px and 720px -->
+    <link rel="stylesheet" type="text/css" media="screen and (min-width:1366px)" href="../style/media/1366-width.css" />
+    <!-- For screens bigger than 1366px -->
+</head>
+
+<body>
+    <header class="register-header">
+        <div class="filesystem-logo">
+            <a href="../.."><img src="{% static 'images/myBiz-logo-horisont.png' %}" /></a>
+        </div>
+    </header>
+
+    <section class="rules" id="rules">
+        
+        <p class="rules-text-main">Дякуємо, що користуєтеся <a href="../..">mybiz.in.ua</a></p>
+        <h1 class="rules-header-main">Правила сервісу <a href="../..">MyBiz</a> </h1>
+        <ol>
+            <li>
+                <h2 class="rules-header"> 1. ЗАГАЛЬНІ ПОЛОЖЕННЯ</h2>
+                <p class="rules-text">Команда сайту mybiz.in.ua (далі - Сайт) встановлює правила користування Сайтом і
+                    залишає за собою право вносити
+                    зміни до цих Правил без окремого попередження і попереднього повідомлення.
+                    Ці правила обов’язкові до виконання усіма користувачами Сайту. Незнання цих Правил не звільняє від
+                    необхідності
+                    їх дотримання. Користування Сайтом означає повну та беззастережну згоду користувача з цими
+                    Правилами.
+                    Користувачі сайту не можуть змінювати цих Правил. У разі незгоди з цими Правилами користувач
+                    зобов’язаний
+                    негайно припинити користування Сайтом.</p>
+            </li>
+            <li>
+                <h2 class="rules-header"> 2. Порядок користування Сайтом</h2>
+                <p class="rules-text">Щоб користуватися Сайтом, потрібно зареєструватись і мати обліковий запис на
+                    Сайті. Задля захисту облікового
+                    запису на Сайті не повідомляйте нікому свій пароль.</p>
+                <p class="rules-text">Ви несете відповідальність за дії, які виконуються у вашому обліковому записі на
+                    Сайті або через нього і вміст,
+                    який зберігається та поширюється на Сайті та за його межі через Сайт.</p>
+                <p class="rules-text">Ви можете користуватися Сайтом лише в межах, дозволених чинним законодавством,
+                    зокрема відповідними законами й
+                    нормативними актами.</p>
+                <p class="rules-text">Уся інформація що була завантажена на Сайт, або передана через нього, залишається
+                    у інтелектуальній власності
+                    особи яка володіла нею до завантаження на Сайт. Тобто сайт ніяк не впливає на права інтелектуальної
+                    власності.</p>
+            </li>
+            <li>
+                <h2 class="rules-header"> 3. Конфіденційність</h2>
+                <p class="rules-text">Ми обробляймо особисті данні та захищаємо конфіденційність згідно з чинним
+                    законодавством. Користуючись Сайтом,
+                    ви погоджуєтесь на поширення наданої вами інформації.</p>
+            </li>
+            <li>
+                <h2 class="rules-header"> 4. Гарантії</h2>
+                <p class="rules-text">Сайт надає високий рівень обслуговування і постійно удосконалюється за для
+                    підвищення безпеки і комфорту
+                    користування. Однак ми не можемо повністю гарантувати постійну якісну роботу Сайту у зв’язку з
+                    факторами, які
+                    можуть не залежить від команди Сайту. Сайт та особи які його представляють не несуть
+                    відповідальності стосовно
+                    неправильного відображення тимчасової не доступності, або зникнення інформації яка була йому
+                    надана.</p>
+            </li>
+        </ol>
+        <a href="http://dev.mybiz.in.ua/register/" class="rules-button">Погоджуюсь</a>
+    
+
+    </section>
+
+    <footer class="filesystem-footer">
+        <nav class="filesystem-footer-links">
+            <a>Форум</a>
+            <a>Про нас</a>
+            <a>Зворотній звʼязок</a>
+            <a>Для інвесторів</a>
+            <a>Краудфандинг</a>
+        </nav>
+
+        <div class="social-links">
+            <div class="soc-link linkedin">
+                <i class="fab fa-linkedin fa-lg"></i>
+            </div>
+
+            <div class="soc-link telegram">
+                <i class="fab fa-telegram-plane fa-lg"></i>
+            </div>
+
+            <div class="soc-link twitter">
+                <i class="fab fa-twitter fa-lg"></i>
+            </div>
+
+            <div class="soc-link instagram">
+                <i class="fab fa-instagram fa-lg"></i>
+            </div>
+
+            <div class="soc-link facebook">
+                <i class="fab fa-facebook fa-lg"></i>
+            </div>
+
+            <div class="soc-link google-plus">
+                <i class="fab fa-google-plus-g fa-lg"></i>
+            </div>
+
+            <div class="soc-link youtube">
+                <i class="fab fa-youtube fa-lg"></i>
+            </div>
+        </div>
+    </footer>
+
+    <script src='https://www.google.com/recaptcha/api.js?hl-uk' async defer></script>
+
+    <script src="{% static 'src/register/request-register.js'%}"></script>
+</body>
+
+</html>

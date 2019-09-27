@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Форма MyBiz</title>
+    <meta name="theme-color" content="#c9e0e04d">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon" href="./img/favicons/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="./img/favicons/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="57x57" href="./img/favicons/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="./img/favicons/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="./img/favicons/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="./img/favicons/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="./img/favicons/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="./img/favicons/apple-touch-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="./img/favicons/apple-touch-icon-180x180.png">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/style/bussinesobject.css">
+</head>
+
+<body>
+
+    <section>
+        <div class="container">
+            <h1 class="title">Реквізити</h1>
+            <form id="business-object-form" method="POST" enctype="multipart/form-data">
+                <div>
+                    <div class="block d-flex align-items-center">
+                        <label for="logo"><strong>Логотип:</strong></label>
+                        <img src="https://via.placeholder.com/150" alt="Logo" class="logo" />
+                        <div class="fileUpload">
+                            <span>Завантажити</span>
+                            <input type="file" name="logo" id="logo" class="upload" required />
+                        </div>
+                        <span></span>
+                    </div>
+                    <div class="block-painted d-flex align-items-center mb-3">
+                        <label for="edrpou">ЄДРПОУ</label>
+                        <input type="text" name="edrpou" id="edrpou" class="input" />
+                        <button class="button" id="fill-button">Заповнити дані з реєстру</button>
+                    </div>
+                    <div class="block-painted d-flex align-items-center mb-3">
+                        <label for="opf">Організаційно-правова форма</label>
+                        <input type="text" name="OPF" id="opf" required />
+                    </div>
+                    <div class="block-painted d-flex align-items-center mb-3">
+                        <label for="TOV_NAME">Назва</label>
+                        <input type="text" name="TOV_NAME" id="TOV_NAME" required />
+                    </div>
+                </div>
+                <div class="block-painted mb-3" id="juridical_address_block">
+                    <div class="d-flex align-items-center flex-wrap">
+                        <h2 class="block--title">Юридична адреса:</h2>
+                        <label for="index">Індекс</label>
+                        <input type="text" name="TOVPOSTCODE" id="index" required />
+                        <label for="region">Область</label>
+                        <input type="text" name="TOVREGION" id="region" required />
+                    </div>
+                    <div class="d-flex align-items-center mt-2 flex-wrap">
+                        <label for="destrict">Район</label>
+                        <input type="text" name="TOVDISTRICT" id="destrict" required />
+                        <label for="city" class="input-wrapper">Місто
+                            <input type="radio" name="TOVCITYTYPE" id="city" value="v" checked />
+                            <span class="checkmark"></span>
+                        </label>
+                        <label for="smt" class="input-wrapper">СМТ
+                            <input type="radio" name="TOVCITYTYPE" id="smt" value="smt" />
+                            <span class="checkmark"></span>
+                        </label>
+                        <label for="country" class="input-wrapper">Селище
+                            <input type="radio" name="TOVCITYTYPE" id="country" value="sl" />
+                            <span class="checkmark"></span>
+                        </label>
+                        <label for="village" class="input-wrapper">Село
+                            <input type="radio" name="TOVCITYTYPE" id="village" value="s" />
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                    <div class="d-flex align-items-center mt-2 flex-wrap">
+                        <label for="TOVCITY">Населенний пункт</label>
+                        <input type="text" name="TOVCITY" id="TOVCITY" required />
+                        <label for="cityDestrict">Район міста</label>
+                        <input type="text" name="TOVCITYDISTRICT" id="cityDestrict" required />
+                    </div>
+                    <div class="d-flex align-items-center mt-2 flex-wrap">
+                        <label for="street" class="input-wrapper">Вулиця
+                            <input type="radio" name="TOVSTREETTYPE" id="street" value="s" checked />
+                            <span class="checkmark"></span>
+                        </label>
+                        <label for="avenue" class="input-wrapper">Проспект
+                            <input type="radio" name="TOVSTREETTYPE" id="avenue" value="a" />
+                            <span class="checkmark"></span>
+                        </label>
+                        <label for="square" class="input-wrapper">Площа
+                            <input type="radio" name="TOVSTREETTYPE" id="square" value="sq" />
+                            <span class="checkmark"></span>
+                        </label>
+                        <label for="lane" class="input-wrapper">Провулок
+                            <input type="radio" name="TOVSTREETTYPE" id="lane" value="l" />
+                            <span class="checkmark"></span>
+                        </label>
+                        <label for="quay" class="input-wrapper">Набережна
+                            <input type="radio" name="TOVSTREETTYPE" id="quay" value="q" />
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                    <div class="d-flex align-items-center mt-2 flex-wrap">
+                        <label for="streetName">Назва</label>
+                        <input type="text" name="TOVSTREET" id="streetName" required />
+                        <label for="building">Будинок</label>
+                        <input type="text" name="TOVBUILD" id="building" required />
+                        <label for="corps">Корпус</label>
+                        <input type="number" name="TOVCORP" id="corps" required />
+                    </div>
+                    <div class="d-flex align-items-center mt-2 flex-wrap">
+                        <label for="apartmentsType">Тип приміщення</label>
+                        <input type="text" id="apartmentsType" name="TOVAPTTYPE" required />
+                        <label for="apartments">Номер приміщення</label>
+                        <input type="number" id="apartments" name="TOVAPTNUM" required />
+                    </div>
+                </div>
+                <div class="block-painted mb-3" id="factaddress">
+                    <div class="d-flex align-items-center mb-2">
+                        <h2 class="block--title">Фактична адреса:</h2>
+                        <label for="adressTrue" class="input-wrapper">Співпадає з юридичною
+                            <input type="radio" name="adress" id="adressTrue" checked />
+                            <span class="checkmark"></span>
+                        </label>
+                        <label for="adressInsert" class="input-wrapper">Заповнити
+                            <input type="radio" name="adress" id="adressInsert" />
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                    <div id="actualAddress">
+                        <div class="d-flex align-items-center flex-wrap">
+                            <label for="index2">Індекс</label>
+                            <input type="number" name="index" id="index2" />
+                            <label for="region1">Область</label>
+                            <input type="text" name="region1" id="region1" />
+                        </div>
+                        <div class="d-flex align-items-center mt-2 flex-wrap">
+                            <label for="destrict1">Район</label>
+                            <input type="text" name="destrict1" id="destrict1" />
+                            <label for="city3" class="input-wrapper">Місто
+                                <input type="radio" name="settlementType" id="city3" />
+                                <span class="checkmark"></span>
+                            </label>
+                            <label for="smt3" class="input-wrapper">СМТ
+                                <input type="radio" name="settlementType" id="smt3" />
+                                <span class="checkmark"></span>
+                            </label>
+                            <label for="country3" class="input-wrapper">Селище
+                                <input type="radio" name="settlementType" id="country3" />
+                                <span class="checkmark"></span>
+                            </label>
+                            <label for="village3" class="input-wrapper">Село
+                                <input type="radio" name="settlementType" id="village3" />
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                        <div class="d-flex align-items-center mt-2 flex-wrap">
+                            <label for="settlement2">Населенний пункт</label>
+                            <input type="text" name="settlement" id="settlement2" />
+                            <label for="cityDestrict2">Район міста</label>
+                            <input type="text" name="cityDestrict" id="cityDestrict2" />
+                        </div>
+                        <div class="d-flex align-items-center mt-2 flex-wrap">
+                            <label for="street2" class="input-wrapper">Вулиця
+                                <input type="radio" name="streetType" id="street2" />
+                                <span class="checkmark"></span>
+                            </label>
+                            <label for="avenue2" class="input-wrapper">Проспект
+                                <input type="radio" name="streetType" id="avenue2" />
+                                <span class="checkmark"></span>
+                            </label>
+                            <label for="square2" class="input-wrapper">Площа
+                                <input type="radio" name="streetType" id="square2" />
+                                <span class="checkmark"></span>
+                            </label>
+                            <label for="lane2" class="input-wrapper">Провулок
+                                <input type="radio" name="streetType" id="lane2" />
+                                <span class="checkmark"></span>
+                            </label>
+                            <label for="quay2" class="input-wrapper">Набережна
+                                <input type="radio" name="streetType" id="quay2" />
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                        <div class="d-flex align-items-center mt-2 flex-wrap">
+                            <label for="streetName2">Назва</label>
+                            <input type="text" name="streetName" id="streetName2" />
+                            <label for="building2">Будинок</label>
+                            <input type="text" name="building2" id="building2" />
+                            <label for="corps2">Корпус</label>
+                            <input type="number" name="corps2" id="corps2" />
+                        </div>
+                        <div class="d-flex align-items-center mt-2 flex-wrap">
+                            <label for="apartmentsType2">Тип приміщення</label>
+                            <input type="text" id="apartmentsType2" />
+                            <label for="apartments2">Номер приміщення</label>
+                            <input type="number" id="apartments2" />
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="block-painted mb-3" id="contacts">
+                    <h2 class="block--title">Контакти: </h2>
+
+                    <div class="block d-flex align-items-center flex-wrap mb-1 mt-1 js-init-phone">
+                        <label for="tel">Телефон</label>
+                        <input type="tel" id="tel"/>
+                        <label for="fax" class="fax input-wrapper js-socials">
+                            <img src="../../static/img/fax.webp" alt="fax">
+                            <input type="checkbox" name="fax" id='fax' />
+                            <span class="checkmark"></span>
+                        </label>
+                        <label for="viber" class="viber input-wrapper js-socials">
+                            <img src="../../static/img/viber.svg" alt="viber">
+                            <input type="checkbox" name="viber" id='viber' />
+                            <span class="checkmark"></span>
+                        </label>
+                        <label for="telegram" class="telegram input-wrapper js-socials">
+                            <img src="../../static/img/telegram.svg" alt="telegram">
+                            <input type="checkbox" name="telegram" id='telegram' />
+                            <span class="checkmark"></span>
+                        </label>
+                        <label for="whatsup" class="whatsup input-wrapper js-socials">
+                            <img src="../../static/img/whatsapp.svg" alt="whatsup">
+                            <input type="checkbox" name="whatsup" id='whatsup' />
+                            <span class="checkmark"></span>
+                        </label>
+                        <button class="button" id="addBtn">+</button>
+                    </div>
+
+                    <table class="table table-striped" id="phoneTable">
+
+                    </table>
+
+                    <div class="d-flex align-items-center mt-2">
+                        <label for="email">Електронна пошта</label>
+                        <input type="email" name="email" id="email" required />
+                    </div>
+                    <div class="d-flex align-items-center mt-2">
+                        <label for="url">Адреса сторінки в інтернеті</label>
+                        <input type="url" name="url" id="url" />
+                    </div>
+                </div>
+
+                <div class="block-painted mb-3">
+                    <h2 class="block--title">Засновники:</h2>
+                    <div>
+                        <span>Додати засновника</span>
+                        <button class="button" id="addCofounder">+</button>
+                    </div>
+                    <div id="cofounder">
+                        <div class="d-flex align-items-center mt-2">
+                            <label for="FNAME" id="founderNameLabel">Прізвище</label>
+                            <input type="text" name="FNAME" id="FNAME" />
+                        </div>
+                        <div class="d-flex align-items-center mt-2">
+                            <label for="LNAME" id="founderNameLabel1">Імʼя</label>
+                            <input type="text" name="LNAME" id="LNAME" />
+                        </div>
+                        <div class="d-flex align-items-center mt-2">
+                            <label for="MNAME" id="founderNameLabel2">По батькові</label>
+                            <input type="text" name="MNAME" id="MNAME" />
+                        </div>
+
+                        <div class="d-flex align-items-center mt-2">
+                            <label for="BIRTHDAY" id="founderNameLabel3">Дата народження</label>
+                            <input type="date" name="BIRTHDAY" id="BIRTHDAY" />
+                        </div>
+
+                        <div class="d-flex align-items-center mt-2">
+                            <label for="PASSER" id="founderNameLabel4">Паспорт (Серія)</label>
+                            <input type="text" name="PASSER" id="PASSER" />
+                        </div>
+
+                        <div class="d-flex align-items-center mt-2">
+                            <label for="PASSNO" id="founderNameLabel5">Паспорт №</label>
+                            <input type="text" name="PASSNO" id="PASSNO" />
+                        </div>
+
+                        <div class="d-flex align-items-center mt-2">
+                            <label for="RV_GU" id="founderNameLabel6">Виданий</label>
+                            <input type="text" name="RV_GU" id="RV_GU" />
+                        </div>
+
+                        <div class="d-flex align-items-center mt-2">
+                            <label for="PASDATA" id="founderNameLabel7">Дата видачі</label>
+                            <input type="text" name="PASDATA" id="PASDATA" />
+                        </div>
+
+                        <div class="d-flex align-items-center mt-2">
+                            <label for="REG_POSTCODE" id="founderNameLabel19">Поштовий індекс</label>
+                            <input type="text" name="REG_POSTCODE" id="REG_POSTCODE" />
+                        </div>
+
+                        <div class="d-flex align-items-center mt-2">
+                            <label for="CITIZENOF" id="founderNameLabel8">Країна</label>
+                            <input type="text" name="CITIZENOF" id="CITIZENOF" />
+                        </div>
+
+                        <div class="d-flex align-items-center mt-2">
+                            <label for="REG_REGION" id="founderNameLabel9">Область</label>
+                            <input type="text" name="REG_REGION" id="REG_REGION" />
+                        </div>
+
+                        <div class="d-flex align-items-center mt-2">
+                            <label for="REG_DISTRICT" id="founderNameLabel10">Район</label>
+                            <input type="text" name="REG_DISTRICT" id="REG_DISTRICT" />
+                        </div>
+
+                        <div class="d-flex align-items-center mt-2">
+                            <label for="REG_CITY" id="founderNameLabel11">Місто</label>
+                            <input type="text" name="REG_CITY" id="REG_CITY" />
+                        </div>
+
+                        <div class="d-flex align-items-center mt-2 flex-wrap">
+                            <label for="city2" class="input-wrapper">Місто
+                                <input type="radio" name="REG_CITYTYPE" id="city2" value="v" />
+                                <span class="checkmark"></span>
+                            </label>
+                            <label for="smt2" class="input-wrapper">СМТ
+                                <input type="radio" name="REG_CITYTYPE" id="smt2" value="smt" />
+                                <span class="checkmark"></span>
+                            </label>
+                            <label for="country2" class="input-wrapper">Селище
+                                <input type="radio" name="REG_CITYTYPE" id="country2" value="sl" />
+                                <span class="checkmark"></span>
+                            </label>
+                            <label for="village2" class="input-wrapper">Село
+                                <input type="radio" name="REG_CITYTYPE" id="village2" value="s" />
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+
+                        <div class="d-flex align-items-center mt-2">
+                            <label for="REG_CITYDISTRICT" id="founderNameLabel12">Район міста</label>
+                            <input type="text" name="REG_CITYDISTRICT" id="REG_CITYDISTRICT" />
+                        </div>
+
+                        <div class="d-flex align-items-center mt-2">
+                            <label for="REG_STREET" id="founderNameLabel13">Вулиця</label>
+                            <input type="text" name="REG_STREET" id="REG_STREET" />
+                        </div>
+
+                        <div class="d-flex align-items-center mt-2">
+                            <label for="REG_BUILD" id="founderNameLabel14">Номер будинку</label>
+                            <input type="text" name="REG_BUILD" id="REG_BUILD" />
+                        </div>
+
+                        <div class="d-flex align-items-center mt-2">
+                            <label for="REG_CORP" id="founderNameLabel15">Корпус</label>
+                            <input type="text" name="REG_CORP" id="REG_CORP" />
+                        </div>
+
+                        <div class="d-flex align-items-center mt-2">
+                            <label for="REG_APTTYPE" id="founderNameLabel16">Тип приміщення</label>
+                            <input type="text" name="REG_APTTYPE" id="REG_APTTYPE" />
+                        </div>
+
+                        <div class="d-flex align-items-center mt-2">
+                            <label for="REG_APTNUM" id="founderNameLabel17">Номер офісу</label>
+                            <input type="text" name="REG_APTNUM" id="REG_APTNUM" />
+                        </div>
+
+                        <div class="d-flex align-items-center mt-2">
+                            <label for="NOIPN" id="founderNameLabel18">Немає ІПН</label>
+                            <input type="checkbox" name="NOIPN" id="NOIPN" value="0" checked />
+                            <input type="checkbox" name="NOIPN" id="NOIPN2" value="1" />
+                        </div>
+
+                        <div class="d-flex align-items-center mt-2">
+                            <label for="IPN" id="founderEdrpouLabel">ЄДРПОУ/ПДФО</label>
+                            <input type="text" name="IPN" id="IPN" />
+                        </div>
+
+                        <div class="d-flex align-items-center mt-2">
+                            <label for="SHARE_UAH" id="shareLabel2">Розмір внеску до статутного фонду (грн.)</label>
+                            <input type="number" name="SHARE_UAH" id="SHARE_UAH" />
+                        </div>
+
+                        <div class="d-flex align-items-center mt-2">
+                            <label for="SHARE" id="shareLabel3">Розмір внеску до статутного фонду (%)</label>
+                            <input type="number" name="SHARE" id="SHARE" />
+                        </div>
+                    </div>
+                    <table class="table table-striped" id="foundersTable">
+
+                    </table>
+                </div>
+                <div class="block-painted d-flex align-items-center mb-3">
+                    <label for="TOTAL_UAH">Розмір статутного капіталу</label>
+                    <input type="number" name="TOTAL_UAH" id="TOTAL_UAH" required />
+                </div>
+                <div class="block-painted mb-3" id="statut_capital_block">
+                    <div class="d-flex mt-2">
+                        <label for="dateShareCapital">Дата формування статутного капіталу</label>
+                        <input type="date" name="dateShareCapital" id="dateShareCapital" required />
+                    </div>
+                    <div class="d-flex align-items-center mt-2">
+                        <label for="protocol">Протокол зборів засновників</label>
+                        <div class="fileUpload">
+                            <span>Завантажити</span>
+                            <input type="file" name="protocol" id="protocol" class="upload" required />                            
+                        </div>
+                        <span></span>
+                    </div>
+                    <div class="d-flex align-items-center mt-2">
+
+                        <label for="regulations">Статут</label>
+                        <div class="fileUpload">
+                            <span>Завантажити</span>
+                            <input type="file" name="regulations" id="regulations" class="upload" required />
+                        </div>
+                        <span></span>
+                    </div>
+                </div>
+                <div class="block-painted d-flex align-items-center mb-3">
+                    <label for="management">Орган управління юридичної особи
+                    </label>
+                    <input type="text" name="management" id="management" />
+                </div>
+                <div class="block-painted mb-3" id="registration_juridical_block">
+                    <div class="d-flex align-items-center">
+                        <label for="registracionDate">Дата та номер запису в Єдиному державному реєстрі про
+                            проведення державної реєстрації юридичної особи
+                        </label>
+                        <input type="date" name="registracionDate" id="registracionDate" required />
+                        <input type="text" name="registracionNumber" id="registracionNumber" required />
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <label for="extract">Виписка</label>
+                        <div class="fileUpload">
+                            <span>Завантажити</span>
+                            <input type="file" name="extract" id="extract" class="upload" required />
+                        </div>
+                        <span></span>
+                    </div>
+                </div>
+                <div class="block-painted mb-3">
+                    <div class="d-flex align-items-center mb-2">
+                        <label for="activity">Вид діяльності</label>
+                        <input type="text" name="activity" id="activity" />
+                    </div>
+                    <div>
+                        <span>Додати вид діяльності</span>
+                        <button class="button" id="type_activity">+</button>
+                    </div>
+                    <table class="table table-striped" id="tableActivities">
+
+                    </table>
+                </div>
+                <div class="block-painted mb-3" id="derzh_stat_block">
+                    <h2 class="block--title">
+                        Облік у державному органі статистики:
+                    </h2>
+                    <div class="d-flex align-items-center mb-2 mt-2">
+                        <label for="statisticName">Назва</label>
+                        <input type="text" name="statisticName" id="statisticName" required />
+                    </div>
+                    <div class="d-flex align-items-center flex-wrap">
+                        <label for="id">Індифікаційний код</label>
+                        <input type="text" name="id" id="id" required />
+                        <label for="statisticDate"></label><input type="date" name="statisticDate" id="statisticDate"
+                            required />
+                    </div>
+                </div>
+                <div class="block-painted mb-3" id="dpi_block">
+                    <h2 class="block--title mb-3">Облік у ДПІ:</h2>
+                    <div class="d-flex align-items-center mb-2">
+                        <label for="taxName">Оберіть ДПІ</label>
+                        <select name="taxName" id="taxName">                            
+                        </select>
+                    </div>
+                    <div class="d-flex align-items-center mb-2 flex-wrap">
+                        <label for="taxId">Код установи</label>
+                        <input type="text" name="taxId" id="taxId" required disabled />
+                    </div>
+                    <div class="d-flex align-items-center mb-2 flex-wrap">
+                        <label for="code">ЄДРПОУ ДПІ</label>
+                        <input type="text" name="code" id="code" disabled />
+                    </div>
+                    <div class="d-flex align-items-center mb-2">
+                        <label for="taxDate">Дата взяття на облік</label>
+                        <input type="date" name="taxDate" id="taxDate" required />
+                        <label for="taxExtract">Витяг</label>
+                        <div class="fileUpload">
+                            <span>Завантажити</span>
+                            <input type="file" name="taxExtract" id="taxExtract" class="upload" required />
+                        </div>
+                        <span></span>
+                    </div>
+                    <div>
+                        <div class="d-flex align-items-center mb-2">
+
+                            <label for="vat" class="input-wrapper">Платник ПДВ
+                                <input type="checkbox" name="vat" id="vat" required />
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                        <div class="d-flex align-items-center mb-2">
+
+                            <label for="vatDate">Дата взяття на облік платника ПДВ</label>
+                            <input type="date" name="vatDate" id="vatDate" required />
+                        </div>
+                        <div class="d-flex align-items-center mb-2">
+                            <label for="vatExtract">Свідоцтво платника ПДВ</label>
+                            <div class="fileUpload">
+                                <span>Завантажити</span>
+                                <input type="file" id="vatExtract" class="upload" required />
+                            </div>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center mb-2">
+                        <label for="singleTax" class="input-wrapper">Платник єдиного податку
+                            <input type="checkbox" name="singleTax" id="singleTax" required />
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                    <div class="singleTaxArea d-none">
+
+
+                        <div class="d-flex align-items-center mb-2">
+                            <label for="singleTaxDate">Дата переходу на єдиний податок</label>
+                            <input type="date" name="singleTaxDate" id="singleTaxDate" />
+                        </div>
+                        <div class="d-flex align-items-center mb-2">
+                            <label for="group1" class="input-wrapper">Перша група
+                                <input type="radio" name="singleTaxGroup" id="group1" />
+                                <span class="checkmark"></span>
+                            </label>
+                            <label for="group2" class="input-wrapper">Друга група
+                                <input type="radio" name="singleTaxGroup" id="group2" />
+                                <span class="checkmark"></span>
+                            </label>
+                            <label for="group3" class="input-wrapper">Третя група
+                                <input type="radio" name="singleTaxGroup" id="group3" />
+                                <span class="checkmark"></span>
+                            </label>
+                            <label for="group4" class="input-wrapper">Четверта група
+                                <input type="radio" name="singleTaxGroup" id="group4" />
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                        <div class="d-flex align-items-center mb-2">
+                            <label for="certificate">Свідоцтво платника єдиного податку</label>
+                            <div class="fileUpload">
+                                <span>Завантажити</span>
+                                <input type="file" id="certificate" class="upload" required />
+                            </div>
+                            <span></span>
+                        </div>
+                        <div class="d-flex align-items-center mb-2">
+                            <label for="singleTaxId">Реєстраційний номер платника єдиного внеску</label>
+                            <input type="text" name="singleTaxId" id="singleTaxId" required />
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center mb-2">
+                        <label for="riskClass">Клас професійного ризику виробництва платника
+                            єдиного внеску за основним видом його економічної
+                            діяльності</label>
+                        <input type="text" name="riskClass" id="riskClass" required />
+                    </div>
+                </div>
+                <div class="block-painted mb-3" id="positionsdiv">
+                    <h2 class="block--title">Інформація щодо посадових осіб</h2><br>
+                    <div class="d-flex align-items-center mb-2">
+                        <label for="positionPosition">Посада</label>
+                        <input type="text" name="positionPosition" id="positionPosition" />
+                    </div>
+                    <div class="d-flex align-items-center mb-2">
+                        <label for="positionName">ПІБ</label>
+                        <input type="text" name="positionName" id="positionName" />
+                    </div>
+                    <div class="d-flex align-items-center mb-2">
+                        <label for="passport">Паспорт</label>
+                        <input type="text" name="passport" id="passport" />
+                        <div class="fileUpload">
+                            <span>Завантажити</span>
+                            <input type="file" name="passportFile" id="passportFile" class="upload" />
+                        </div>
+                        <span></span>
+                    </div>
+                    <div class="d-flex align-items-center mb-2">
+                        <label for="positionId">ІПН</label>
+                        <input type="text" name="positionId" id="positionId" />
+                        <!--
+                    <label for="positionCertificate">ІПН</label>
+-->
+                        <div class="fileUpload">
+                            <span>Завантажити</span>
+                            <input type="file" name="positionCertificateFile" id="positionCertificateFile"
+                                class="upload" />
+                        </div>
+                        <span></span>
+                    </div>
+                    <div>
+                        <span>Додати посадову особу</span>
+                        <button class="button" id="addPosition">+</button>
+                    </div>
+                    <table class="table table-striped" id="tablePositions">
+
+                    </table>
+                </div>
+                <div class="block-painted mb-3" id="paymentInfo">
+
+                    <div class="block">
+                        <h2 class="block--title">
+                            Інформація щодо розрахункових рахунків
+                        </h2>
+                        <div class="d-flex align-items-center mb-2">
+                            <label for="accountNumber">Номер рахунку</label>
+                            <input type="number" name="accountNumber" id="accountNumber" />
+                            <label for="accounCertifitate">Довідка про відкриття рахунку</label>
+                            <div class="fileUpload">
+                                <span>Завантажити</span>
+                                <input type="file" name="accounCertifitateFile" id="accounCertifitate" class="upload" />
+                            </div>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center mb-2">
+                        <label for="bankName">Назва банку</label>
+                        <input type="text" name="bankName" id="bankName" />
+                        <label for="mfo">МФО</label>
+                        <input type="text" name="mfo" id="mfo" />
+                    </div>
+                    <div>
+                        <span>Додати розрахунковий рахунок</span>
+                        <button id="btnPaymentInfo" class="button">+</button>
+                    </div>
+
+                    <table class="table table-striped" id="tablePaymentInfo">
+
+                    </table>
+                </div>
+                <div class="block-painted mb-3" id="departmentsdiv">
+                    <div>
+                        <h2 class="block--title ">Відділ</h2>
+                        <div class="d-flex align-items-center mb-2">
+                            <label for="departmentName">Назва</label>
+                            <input type="text" name="departmentName" id="departmentName">
+                        </div>
+                        <div class="d-flex align-items-center  flex-wrap" id="departments-contacts">
+                            <label for="departmentTel">Телефон</label>
+                            <input type="tel" id="departmentTel" name="departmentTel" />
+                            <label for="departmentFax" class="fax input-wrapper">
+                                <img src="../../static/img/fax.png" alt="fax">
+                                <input type="checkbox" name="fax" id="departmentFax" />
+                                <span class="checkmark"></span>
+                            </label>
+                            <label for="departmentViber" class="viber input-wrapper">
+                                <img src="../../static/img/viber.svg" alt="viber">
+                                <input type="checkbox" name="viber" id="departmentViber" />
+                                <span class="checkmark"></span>
+                            </label>
+                            <label for="departmentTelegram" class="telegram input-wrapper">
+                                <img src="../../static/img/telegram.svg" alt="telegram">
+                                <input type="checkbox" name="telegram" id="departmentTelegram" />
+                                <span class="checkmark"></span>
+                            </label>
+                            <label for="departmentWhatsup" class="whatsup input-wrapper">
+                                <img src="../../static/img/whatsapp.svg" alt="whatsup">
+                                <input type="checkbox" name="whatsup" id="departmentWhatsup" />
+                                <span class="checkmark"></span>
+                            </label>
+
+                            <button class="button">-</button>
+                        </div>
+                        <div class="mt-2">
+                            <span>Додати ще один номер телефону</span>
+                            <button class="button" id="departmentscbtn">+</button>
+                        </div><br>
+                        <div class="mb-2">
+                            <span>Додати відділ</span>
+                            <button class="button" id="departmentsbtn">+</button>
+                        </div>
+                        <table class="table table-striped" id="tableDepartmentsContacts">
+
+                        </table>
+                        <br>
+
+                        <table class="table table-striped" id="tableDepartments">
+
+                        </table>
+                    </div>
+                </div>
+                <button class="button" id="submitbtn">Зберегти</button>
+            </form>
+        </div>
+    </section>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script src="/static/src/cabinet/bussinesobject.js"></script>
+    <script>
+
+
+    </script>
+</body>
+
+</html>
